@@ -1,333 +1,156 @@
-<!DOCTYPE html><html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#040912"><meta name="description" content="Ω — ΞΦΛE: laboratório ontológico tridimensional e observáveis experimentais de emergência."><title>Ω | ΞΦΛE — Existence Sandbox</title><style>:root{color-scheme:dark;--bg:#040a12;--panel:#07111acc;--line:#29404d88;--ink:#f0f8fc;--muted:#859dae;--cyan:#82eddc;--violet:#b49bff;--orange:#f3bf95;--glass:blur(25px)}
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;font-size:13px}
-button,select,input{font:inherit}
-button{color:inherit;border:0;background:transparent;cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
-#universe{position:fixed;inset:0;width:100%;height:100%;touch-action:none;cursor:grab}
-#universe:active{cursor:grabbing}
-#atmosphere{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 23%,#04081133 61%,#020710c6 105%),linear-gradient(90deg,#020812aa,transparent 25%,transparent 70%,#02081299)}
-.glass{background:var(--panel);backdrop-filter:var(--glass);-webkit-backdrop-filter:var(--glass);border:1px solid var(--line);box-shadow:0 22px 70px #0004}
-.masthead{position:fixed;top:0;left:0;right:0;padding:19px 29px;display:flex;align-items:center;justify-content:space-between;gap:18px;pointer-events:none}
-.masthead>*{pointer-events:auto}
-.identity{display:flex;align-items:center;gap:12px;min-width:252px}
-.mark{height:51px;width:51px;border:1px solid #38636b;border-radius:15px;background:#08343a45;color:var(--cyan);display:grid;place-items:center;font:38px Georgia,serif;box-shadow:inset 0 0 28px #4ff7e117,0 0 30px #00e7dc0a}
-.identity strong{display:block;font-size:16px;letter-spacing:.16em;font-weight:600}
-.identity strong span{color:#6b8f9d;font-weight:300}
-.identity small{display:block;color:#8197a8;letter-spacing:.17em;font-size:9px;font-weight:700;margin-top:5px}
-.identity em{font-style:normal;color:var(--cyan)}
-.header-center{color:#8aa7b4;letter-spacing:.2em;font-size:9px;font-weight:750;white-space:nowrap}
-.livemark,.softdot{display:inline-block;width:6px;height:6px;background:#6eeed7;border-radius:50%;box-shadow:0 0 12px #5df9db;margin-right:8px}
-.light-sep{margin:0 7px;color:#41616f}
-.header-buttons{display:flex;gap:9px;justify-content:flex-end;min-width:250px}
-.ghost{padding:11px 14px;border:1px solid #385160;border-radius:11px;background:#071a25ac;color:#b7ccd6;font-size:11px;font-weight:650}
-.ghost:hover{background:#13323c;color:var(--cyan)}
-.iconbutton{font-size:20px;padding:5px 12px}
-.sidebar,.inspector{position:fixed;top:99px;bottom:98px;border-radius:17px;padding:19px 18px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#375365 transparent}
-.sidebar{left:24px;width:261px}
-.inspector{right:24px;width:286px}
-.overline{color:#99b5c3;letter-spacing:.19em;font-size:9px;font-weight:800}
-.rule{height:1px;background:#253e4d;margin:17px 0}
-.ontosteps{margin-top:13px}
-.step{padding:10px 8px;width:100%;border-radius:10px;display:flex;gap:11px;align-items:center;text-align:left;transition:.2s}
-.step:hover{background:#18303e}
-.step.active{background:#10333e;border:1px solid #2d6872;padding:9px 7px}
-.sigil{font:23px/1 Georgia,serif;width:25px;text-align:center;color:#729cae}
-.step.active .sigil{color:#7ef4dd;text-shadow:0 0 25px #60eddb7a}
-.stepcopy{flex:1}
-.stepcopy b{font-size:12px;font-weight:640;display:block}
-.stepcopy small{font-size:10px;color:#7e9aa7;display:block;margin-top:2px}
-.stepmark{color:#476677;font-size:9px}
-.sliderlabel{display:flex;justify-content:space-between;align-items:baseline;font-size:11px;color:#bcd0db;font-weight:600;margin:16px 0 6px}
-.sliderlabel output{color:var(--cyan);font-size:11px;font-variant-numeric:tabular-nums}
-input[type=range]{width:100%;height:4px;accent-color:#6ff0d8;cursor:pointer;margin:6px 0 4px}
-.underhelp{font-size:10px;line-height:1.5;color:#718e9d}
-.zoomhead{display:flex;align-items:center;justify-content:space-between;margin:12px 0 2px}
-.zoomhead span{font-size:10px;letter-spacing:.12em;color:#7f9aa9}
-.zoomhead strong{font:23px Georgia,serif;color:var(--cyan)}
-.leftfoot{margin-top:18px;font-size:9px;line-height:1.5;color:#82a9aa;letter-spacing:.075em}
-.sidebar .softdot{width:5px;height:5px;margin-right:5px}
-#stage{position:fixed;left:304px;right:334px;top:96px;bottom:94px;pointer-events:none}
-.narrative{position:absolute;left:10px;top:28px;max-width:470px;text-shadow:0 4px 24px #000b}
-.eyebrow{color:var(--cyan);font-weight:720;letter-spacing:.22em;font-size:10px;margin-bottom:15px}
-.narrative h1{font-size:clamp(26px,2.65vw,44px);line-height:1.18;font-weight:480;letter-spacing:-.05em;margin:0}
-.narrative h1 em{font-family:Georgia,serif;font-style:italic;color:#b8f1e9;font-weight:400}
-.narrative p{font-size:12px;line-height:1.8;color:#a7c5cf;max-width:380px;margin-top:13px}
-.worldreadout{position:absolute;bottom:19px;left:10px;display:flex;gap:21px;padding:10px 14px;border-radius:10px;background:#051421a2;border:1px solid #27445370}
-.worldreadout div{display:flex;flex-direction:column;gap:5px}
-.worldreadout b{font-size:10px;font-weight:550;letter-spacing:.07em;color:#e0f8f9}
-.smallcaps{font-size:8px;font-weight:750;letter-spacing:.17em;color:#7f9aa9}
-.burst{position:absolute;top:51%;left:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:16px;background:#0d3028bb;border:1px solid #9ee8c899;border-radius:18px;padding:12px 19px;box-shadow:0 0 50px #69efbe22;text-shadow:0 1px 10px #000;animation:glow 2s ease-in-out infinite}
-.burst>span{font:36px Georgia,serif;color:#e5ffc9}
-.burst b{display:block;font-size:10px;letter-spacing:.18em}
-.burst small{display:block;font-size:10px;color:#b0d8c5;margin-top:4px}
-@keyframes glow{50%{box-shadow:0 0 80px #a4edb166}
-}
-.hidden{display:none!important}
-#reticle{pointer-events:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);height:17px;width:17px;border:1px solid #72e9d628;border-radius:50%}
-#reticle i:first-child{position:absolute;width:1px;height:24px;left:8px;top:-4px;background:#95eed333;transform:scaleY(.65)}
-#reticle i:last-child{position:absolute;height:1px;width:24px;left:-4px;top:8px;background:#95eed333;transform:scaleX(.65)}
-.between{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.mono{color:#a4b9c6;font:10px ui-monospace,monospace}
-.tiny{font-size:8px}
-.muted{color:#708c9a}
-.metric-hero{padding:22px 0 12px;border-bottom:1px solid #26404e}
-.metric-small{color:#92aab8;font-size:10px;letter-spacing:.15em;font-weight:700}
-.hypothesis{border:1px solid #3b6870;color:var(--cyan);padding:3px 5px;border-radius:5px;font-size:7px;margin-left:8px}
-.metric-hero strong{display:block;font-size:53px;letter-spacing:-.07em;font-weight:500;line-height:1.1;margin:8px 0 1px;color:#9af5df;text-shadow:0 0 35px #46f8d429}
-.metric-hero small{color:#8ea7b2;font-size:10px}
-.trend{display:block;width:100%;height:77px;margin:6px 0 12px}
-.metric-row{display:grid;grid-template-columns:1fr 55px 34px;gap:8px;align-items:center;margin:15px 0}
-.metric-row>span{display:grid;grid-template-columns:9px 17px auto;gap:5px;align-items:center;white-space:nowrap}
-.metric-row>span b{font:15px Georgia,serif}
-.metric-row>span small{font-size:9px;color:#90a7b4}
-.bullet{width:6px;height:6px;border-radius:50%;background:var(--cyan)}
-.bullet.orange{background:var(--orange)}
-.bullet.violet{background:var(--violet)}
-.bar{height:4px;background:#243d4a;border-radius:10px;overflow:hidden}
-.bar>div{height:100%;width:0%;border-radius:10px;background:var(--cyan);transition:width .2s}
-.metric-row:first-child .bar>div{background:var(--orange)}
-.metric-row:last-child .bar>div{background:var(--violet)}
-.metric-row output{text-align:right;font:10px ui-monospace,monospace;color:#d3e7ea}
-.measuregrid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin:22px 0}
-.measuregrid>div{background:#0a1a2794;border:1px solid #233e4b;border-radius:10px;padding:10px}
-.measuregrid small{font-size:9px;color:#80a2ae;display:block}
-.measuregrid b{display:block;font-size:15px;margin-top:7px;font-weight:500;font-variant-numeric:tabular-nums}
-.separator{height:1px;background:#26404e;margin:17px 0}
-.eventlog{margin-top:13px;max-height:210px;overflow-y:auto}
-.logrow{display:flex;gap:10px;padding:0 0 13px}
-.logrow>i{flex:none;margin-top:6px;width:7px;height:7px;border-radius:50%;border:1px solid #82ead7}
-.logrow.emerge>i{background:#f1e4a7;border-color:#f1e4a7;box-shadow:0 0 14px #f6f2a7}
-.logrow strong{font-size:10px;font-weight:650;display:block}
-.logrow small{font-size:9px;color:#819baa;display:block;line-height:1.6;margin-top:4px}
-.toolbar{position:fixed;bottom:19px;left:50%;transform:translateX(-50%);display:flex;gap:9px;align-items:center;padding:10px 12px;border-radius:15px;max-width:calc(100vw - 26px);white-space:nowrap}
-.toolbar-group{display:flex;align-items:center;gap:4px}
-.toolbar button{padding:10px 11px;border-radius:9px;font-size:11px;font-weight:600;color:#a9c3ce}
-.toolbar button:hover{background:#1e3945;color:#f0fffd}
-.toolbar .chosen{background:#11353d;color:#7cf4d9;box-shadow:inset 0 0 0 1px #347781}
-.toolbar .play{background:#9ff3e1;color:#08313a}
-.toolbar .play:hover{background:#c9f6ef;color:#123e3d}
-.toolbar-divider{height:22px;width:1px;background:#304b5d;margin:0 4px}
-.toolbar .export{border:1px solid #375466}
-.compact>span{font-size:9px;color:#73909d;letter-spacing:.1em}
-.compact select{color:#bdd6de;background:#0b1b27;border:1px solid #36505f;border-radius:8px;padding:6px}
-.modalback{position:fixed;inset:0;z-index:50;background:#01050cd9;backdrop-filter:blur(10px);display:grid;place-items:center;padding:18px}
-.modal{width:min(820px,100%);max-height:88vh;overflow-y:auto;border-radius:20px;padding:29px 35px;background:#091824f5}
-.modalClose{float:right;font-size:25px;color:#8cb2c0}
-.modal h2{font-size:28px;font-weight:550;letter-spacing:-.04em}
-.modal h3{color:var(--cyan);font-size:14px;font-weight:650;margin-top:24px}
-.modal p{font-size:12px;line-height:1.8;color:#b2c7d0}
-.equation{font:17px Georgia,serif!important;color:#e2f7f3!important;border:1px solid #31505d;background:#091c2b;padding:17px;border-radius:9px;overflow-wrap:anywhere}
-.inline-equation{font-family:Georgia,serif;color:#d8f1eb}
-.goBack{background:#90ead8;color:#0b2d30;padding:12px 17px;border-radius:10px;font-weight:700;margin-top:16px}
-#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);color:#cff8ee;background:#10353d;border:1px solid #317785;padding:10px 16px;border-radius:10px;opacity:0;transition:.2s;pointer-events:none;font-size:11px}
-#toast.show{opacity:1}
-
-@media(max-width:1180px){.sidebar{left:12px;width:226px;padding:14px}
-.inspector{right:12px;width:235px;padding:14px}
-#stage{left:250px;right:260px}
-.header-center{display:none}
-.header-buttons{min-width:auto}
-.narrative h1{font-size:29px}
-.metric-row{grid-template-columns:1fr 34px}
-.metric-row .bar{display:none}
-}
-
-@media(max-width:780px){.masthead{padding:12px}
-.mark{height:39px;width:39px;font-size:30px}
-.identity{min-width:0}
-.identity strong{font-size:12px}
-.identity small{font-size:7px}
-.header-buttons .ghost:first-child{font-size:9px;padding:8px}
-.sidebar{top:auto;left:8px;bottom:83px;height:auto;max-height:34vh;width:44%;padding:10px;border-radius:12px}
-.inspector{top:auto;right:8px;bottom:83px;height:auto;max-height:34vh;width:49%;padding:11px;border-radius:12px}
-.sidebar .overline,.sidebar .rule,.sidebar .sliderlabel,.sidebar input,.sidebar .underhelp,.sidebar .zoomhead,.sidebar .leftfoot{display:none}
-.ontosteps{display:flex;flex-direction:column;margin:0}
-.step{padding:5px;gap:6px}
-.step.active{padding:4px}
-.stepcopy b{font-size:9px}
-.stepcopy small{display:none}
-.sigil{font-size:16px;width:19px}
-.stepmark{font-size:8px}
-.inspector .measuregrid,.inspector .separator,.inspector .eventlog,.inspector .between:last-of-type,.inspector .trend{display:none}
-.inspector .metric-hero{padding:8px 0}
-.inspector .metric-hero strong{font-size:36px}
-.inspector .metric-row{margin:8px 0}
-.inspector .metric-row>span small{display:none}
-.inspector .metric-small{font-size:8px}
-.inspector .metric-row{grid-template-columns:1fr 35px}
-.inspector .metric-row output{font-size:11px}
-#stage{left:14px;right:14px;top:66px;bottom:82px}
-.narrative{left:0;top:14px;max-width:320px}
-.narrative h1{font-size:25px}
-.narrative p{font-size:10px;max-width:240px}
-.eyebrow{font-size:8px;margin-bottom:8px}
-.worldreadout{bottom:35%;left:0;gap:11px;padding:7px}
-.worldreadout .smallcaps{font-size:7px}
-.worldreadout b{font-size:8px}
-.toolbar{bottom:8px;left:8px;right:8px;transform:none;overflow-x:auto;max-width:none;justify-content:flex-start;padding:8px}
-.toolbar button{font-size:10px;padding:8px}
-.toolbar .toolbar-group.compact{display:none}
-.toolbar .toolbar-divider{margin:0 1px}
-.toolbar .play span{display:none}
-.burst{top:42%;left:50%;padding:8px 10px;gap:8px}
-.burst>span{font-size:23px}
-.burst b{font-size:8px}
-.burst small{font-size:8px}
-.modal{padding:18px}
-.modal h2{font-size:22px}
-}
-
-
-@media(max-width:780px){.sidebar.expanded{max-height:70vh;overflow:auto;width:83%;z-index:7}
-.sidebar.expanded .overline,.sidebar.expanded .rule,.sidebar.expanded .sliderlabel,.sidebar.expanded input,.sidebar.expanded .underhelp,.sidebar.expanded .zoomhead,.sidebar.expanded .leftfoot{display:revert}
-.sidebar.expanded .ontosteps{display:grid;grid-template-columns:1fr 1fr}
-.sidebar.expanded .sliderlabel{display:flex}
-.sidebar.expanded .zoomhead{display:flex}
-.sidebar.expanded .rule{display:block}
-.sidebar.expanded .stepcopy small{display:block}
-}
-
+<!DOCTYPE html>
+<html lang="pt-PT"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#03080e"><meta name="description" content="Ω / ΞΦΛE — experiência imersiva de emergência física computacional"><title>Ω / ΞΦΛE — Sandbox 3</title><style>:root{color-scheme:dark;--ink:#e7f7f5;--dim:#87a8ad;--cyan:#8ff5e0;--violet:#b3a7ff;--gold:#f8dba8;--bg:#03080f}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif}button{appearance:none;border:0;color:inherit;cursor:pointer;background:transparent;user-select:none}button:focus-visible{outline:2px solid #90fbe7;outline-offset:3px}#universe{position:fixed;inset:0;display:block;width:100vw;height:100vh;touch-action:none;outline:none}.cosmos-vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 54% 55% at 51% 49%,transparent 18%,#02060a40 68%,#0205098a 100%),linear-gradient(to bottom,#02070cc9 0,transparent 19%,transparent 80%,#03090bd9 100%)}.head{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:23px 30px;z-index:8;pointer-events:none}.head>*{pointer-events:auto}.brand{display:flex;align-items:center;gap:11px}.brandicon{font-family:Georgia,serif;font-size:34px;color:#8ff9df;width:44px;height:44px;display:grid;place-items:center;border:1px solid #69b9a644;border-radius:13px;background:#061c2091;box-shadow:0 0 25px #76f9d40b}.brandname{font-size:13px;font-weight:680;letter-spacing:.08em}.brandname>span{color:#426470}.brandname small{display:block;letter-spacing:.28em;font-size:8px;margin-top:5px;color:#658a94}.headcenter{display:flex;align-items:center;gap:10px;font-size:9px;letter-spacing:.18em;font-weight:700;color:#9fb5b9}.pulse{width:5px;height:5px;border-radius:50%;background:#7ff1dc;box-shadow:0 0 12px #65ffe1;animation:pulse 2s ease-in-out infinite}.headdot{opacity:.3}@keyframes pulse{50%{opacity:.3;box-shadow:0 0 2px #65ffe1}}.headend{display:flex;gap:8px}.headend button{width:35px;height:35px;border:1px solid #41666c80;background:#06192296;border-radius:10px;color:#bfd4d6;font-size:15px}.headend button:hover{border-color:#8be9d7}.layers{position:fixed;left:30px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;border-radius:24px;background:#06141d9e;border:1px solid #4c7a8140;padding:9px;backdrop-filter:blur(24px);box-shadow:0 25px 80px #0008;z-index:7}.layer{width:63px;height:60px;border-radius:15px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;color:#8caeb7;transition:background .2s,color .2s}.layer span{font:30px Georgia,Times New Roman,serif;font-weight:400}.layer small{font-size:8px;letter-spacing:.05em;color:#789ba5}.layer.active{background:linear-gradient(135deg,#174a4f,#103039a8);box-shadow:inset 0 0 0 1px #65dac588;color:#a8f5e6}.layer.active small{color:#bcf4e9}.layer:hover{background:#153840;color:#d7f9f4}.scenehead{position:fixed;top:115px;left:130px;pointer-events:none;text-shadow:0 2px 35px #02070f}.eyebrow{font-size:9px;font-weight:760;letter-spacing:.22em;color:#84e5d1}.scenehead h1{margin:9px 0 0;font-size:clamp(23px,2.5vw,39px);font-weight:450;letter-spacing:-.04em;line-height:1.18}.layerhint{position:fixed;left:50%;bottom:120px;transform:translateX(-50%);pointer-events:none;font-size:10px;color:#94bac0a0;letter-spacing:.035em;white-space:nowrap;opacity:0;animation:hintfade 7s ease forwards}@keyframes hintfade{0%,20%{opacity:1}90%,100%{opacity:0}}.observatory{position:fixed;right:28px;top:116px;display:flex;gap:12px;align-items:center;padding:13px 16px;border:1px solid #46757d43;border-radius:15px;background:#05141c95;backdrop-filter:blur(18px)}.metric{min-width:54px;border-right:1px solid #3659625c;padding-right:11px}.metric:last-child{border:0;padding:0}.metric span{font:15px Georgia,serif;color:#98ead8;display:block}.metric b{display:block;margin-top:5px;font-size:12px;font-weight:600;letter-spacing:.04em;font-variant-numeric:tabular-nums}.metric:last-child span{color:var(--gold)}.xi-only{position:fixed;right:28px;top:116px;min-width:250px;max-width:320px;background:#081722b8;border:1px solid #856f504a;border-radius:15px;padding:16px 18px;backdrop-filter:blur(20px);box-shadow:0 15px 60px #0004}.xi-status{font-size:10px;letter-spacing:.11em;font-weight:720;color:#d6d4c3;line-height:1.6}.xiEvidence{font-size:10px;color:#a5b2ac;margin-top:9px;line-height:1.8}.xiEvidence:empty{display:none}.xiEvidence b{color:#fde7b1}.emergence-toast{position:fixed;left:50%;top:26%;transform:translate(-50%,-50%);border:1px solid #dac48c66;background:#2d2716b5;border-radius:16px;display:flex;align-items:center;gap:11px;padding:10px 19px;box-shadow:0 0 90px #d2aa542c;pointer-events:none;animation:bloom 1.6s ease-in-out infinite}.emergence-toast strong{font:31px Georgia,serif;color:#ffe9ad}.emergence-toast span{font-size:10px;letter-spacing:.12em;color:#f8e8bc;font-weight:750}@keyframes bloom{50%{box-shadow:0 0 130px #ebc97966}}.hidden{display:none!important}.scaleIndicator{position:fixed;left:130px;bottom:41px;display:flex;align-items:center;gap:12px;color:#82abb1;font-size:10px;letter-spacing:.1em}.scaleIndicator i{opacity:.35}.dock{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:#071925d9;border:1px solid #527f854e;box-shadow:0 13px 55px #0009;backdrop-filter:blur(22px);padding:8px;border-radius:17px;z-index:9}.dock button{min-width:39px;height:37px;border-radius:10px;font-size:15px;color:#9cbec4}.dock button:hover{background:#1a3a42;color:#e8fffb}.dock button.run{background:#9bedde;color:#0d3233;font-size:20px;font-weight:700}.dock button.selected{background:#194247a8;color:#a5ffe8;box-shadow:inset 0 0 0 1px #4bbfba80}.dock button#orbitBtn{font-size:11px}.dock .split{height:24px;width:1px;background:#41677480;margin:0 4px}.modalback{position:fixed;inset:0;z-index:30;background:#000a;backdrop-filter:blur(18px);display:grid;place-items:center;padding:16px}.modal{width:min(820px,100%);max-height:89vh;overflow:auto;padding:36px 42px;border:1px solid #50898d56;background:#081923f6;box-shadow:0 50px 160px #000a;border-radius:21px}.modal .close{position:sticky;top:0;float:right;font-size:28px;color:#88b0b6}.modal h2{font-size:32px;margin:12px 0;letter-spacing:-.05em;font-weight:540}.modal p{color:#a9c3c9;font-size:12px;line-height:1.75}.sciencegrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px 26px}.sciencegrid h3{font-size:12px;color:#b7f8ea;font-weight:700;margin:14px 0 9px}.sciencegrid p{margin:9px 0}.formula{font:14px Georgia,serif;color:#d3eee9;padding:12px 14px;background:#0f2930;border:1px solid #31525d7e;border-radius:9px;line-height:1.6}.aboutFoot{display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid #34525e;margin-top:24px;padding-top:16px}.aboutFoot span{font-size:9px;color:#839ba4}.aboutFoot button{background:#99ebdc;color:#082e2d;border-radius:10px;padding:11px 14px;font-size:11px;font-weight:700;white-space:nowrap}#toast{position:fixed;left:50%;bottom:93px;transform:translateX(-50%);background:#0e353aeb;border:1px solid #43857b;border-radius:10px;padding:10px 15px;font-size:10px;color:#e1fbf6;pointer-events:none;opacity:0;transition:.25s;z-index:20}#toast.show{opacity:1}#reticle{position:fixed;left:50%;top:50%;width:12px;height:12px;border:1px solid #86e4d54a;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;opacity:.12}
+@media(max-width:760px){.head{padding:12px 15px}.brandicon{width:35px;height:35px;font-size:26px;border-radius:10px}.brandname{font-size:11px}.brandname small{font-size:7px}.headcenter{display:none}.headend button{width:31px;height:31px}.layers{left:50%;top:auto;bottom:90px;transform:translateX(-50%);flex-direction:row;gap:2px;padding:5px;border-radius:15px}.layer{width:60px;height:50px;border-radius:10px}.layer span{font-size:23px}.layer small{font-size:7px}.scenehead{top:72px;left:20px}.scenehead h1{font-size:24px}.eyebrow{font-size:8px}.observatory{right:12px;top:auto;bottom:160px;gap:8px;padding:9px 10px}.metric{min-width:38px;padding-right:8px}.metric b{font-size:9px}.metric span{font-size:13px}.xi-only{top:auto;right:12px;bottom:160px;min-width:190px;max-width:250px;padding:10px 12px}.xi-status{font-size:9px}.xiEvidence{font-size:9px}.dock{bottom:15px;padding:6px;max-width:calc(100vw - 12px);gap:2px}.dock button{min-width:36px;height:33px;font-size:13px}.dock button.run{font-size:18px}.dock .split{margin:0 2px}.layerhint{bottom:206px;font-size:9px}.scaleIndicator{bottom:41px;left:15px;font-size:9px}.modal{padding:23px 18px}.modal h2{font-size:24px}.sciencegrid{grid-template-columns:1fr;gap:4px}.aboutFoot{flex-direction:column;align-items:flex-start}.emergence-toast{top:32%;white-space:nowrap}.emergence-toast span{font-size:8px}}
+@media(max-height:650px){.scenehead{top:78px}.observatory,.xi-only{top:75px;bottom:auto}.layers{gap:0;padding:4px}.layer{height:45px}.dock{bottom:6px}}
 </style></head>
 <body>
-<canvas id="universe" aria-label="Campo energético tridimensional imersivo"></canvas>
-<div id="atmosphere"></div><div id="reticle"><i></i><i></i></div>
-<header class="masthead">
- <div class="identity"><div class="mark">Ω</div><div><strong>Ω <span>/</span> ΞΦΛE</strong><small>EXISTENCE SANDBOX <em>2.0</em></small></div></div>
- <div class="header-center"><span class="livemark"></span> SIMULAÇÃO AUTÓNOMA <span class="light-sep">·</span> MODELO EXPLORATÓRIO</div>
- <div class="header-buttons"><button id="helpBtn" class="ghost" title="Fundamentação e limites">Fundamentação ↗</button><button id="fullscreenBtn" class="ghost iconbutton" title="Ecrã completo">⛶</button></div>
+<canvas id="universe" aria-label="Universo computacional 3D navegável"></canvas>
+<div class="cosmos-vignette"></div><div id="reticle"></div>
+<header class="head">
+  <div class="brand"><div class="brandicon">Ω</div><div class="brandname">ΞΦΛE <span>/</span> Ω <small>SANDBOX 03</small></div></div>
+  <div class="headcenter"><span class="pulse"></span><span id="runningLabel">EM EVOLUÇÃO</span><span class="headdot">·</span><span id="timeReadout">t 0.00</span></div>
+  <div class="headend"><button id="helpBtn" aria-label="Sobre a física" title="Física e limites">?</button><button id="fullscreenBtn" aria-label="Ecrã completo" title="Ecrã completo">⛶</button></div>
 </header>
-<aside id="ontology" class="glass sidebar">
- <div class="overline">ONTOLOGIA · SEQUÊNCIA</div>
- <div class="ontosteps">
-  <button class="step active" data-focus="omega"><span class="sigil">Ω</span><span class="stepcopy"><b>Omega</b><small>Potencial · domínio</small></span><span class="stepmark">01</span></button>
-  <button class="step" data-focus="energy"><span class="sigil">E</span><span class="stepcopy"><b>Energia</b><small>Campo · Planck / Einstein</small></span><span class="stepmark">02</span></button>
-  <button class="step" data-focus="frequency"><span class="sigil">Λ</span><span class="stepcopy"><b>Frequência</b><small>Oscilação · Fourier</small></span><span class="stepmark">03</span></button>
-  <button class="step" data-focus="information"><span class="sigil">Φ</span><span class="stepcopy"><b>Informação integrada</b><small>Shannon · IIT (hipótese)</small></span><span class="stepmark">04</span></button>
-  <button class="step" data-focus="emergence"><span class="sigil">Ξ</span><span class="stepcopy"><b>Existência emergente</b><small>Integração · equilíbrio</small></span><span class="stepmark">05</span></button>
- </div>
- <div class="rule"></div>
- <div class="overline">CONTROLOS DO CAMPO</div>
- <label class="sliderlabel" for="energyRange">Energia inicial <output id="energyVal">1.00×</output></label><input id="energyRange" type="range" min=".35" max="2.4" value="1" step=".05" /><div class="underhelp">Escala de amplitude do campo. Energia ∝ amplitude².</div>
- <label class="sliderlabel" for="phaseRange">Dispersão de fases <output id="phaseVal">0.74</output></label><input id="phaseRange" type="range" min="0" max="1" value=".74" step=".01"/><div class="underhelp">Modifica condições iniciais, não as leis.</div>
- <label class="sliderlabel" for="xiThreshold">Limiar Ξ <output id="xiVal">0.055</output></label><input id="xiThreshold" type="range" min=".005" max=".30" value=".055" step=".005"/><div class="underhelp">Critério exploratório de emergência.</div>
- <div class="rule"></div><div class="overline">ESCALA EXPLORATÓRIA</div>
- <div class="zoomhead"><span>LOGARÍTMICA</span><strong id="zoomValue">10<sup>0</sup></strong></div>
- <input id="zoomSlider" type="range" min="-12" max="12" value="0" step=".1" /><div class="underhelp">Sem fronteira visual. A reamostragem multiescala não representa uma simulação física infinita.</div>
- <div class="leftfoot"><div class="softdot"></div><span>Ω NÃO É UMA ESFERA NEM UM RECIPIENTE</span></div>
-</aside>
-<main id="stage">
- <div class="narrative"><div id="sceneEyebrow" class="eyebrow">Ω / DOMÍNIO DE POSSIBILIDADES</div><h1 id="sceneTitle">Antes da forma,<br><em>a possibilidade.</em></h1><p id="sceneDescription">Explora um campo físico sem fronteiras visuais. A organização surge das oscilações, da interferência e das relações que conseguimos medir.</p></div>
- <div class="worldreadout"><div><span class="smallcaps">OBSERVADOR</span> <b id="cameraReadout">ORBITAL · 360°</b></div><div><span class="smallcaps">TEMPO DO MODELO</span> <b id="timeReadout">0.00</b></div><div><span class="smallcaps">ESCALA RELATIVA</span> <b id="scaleReadout">10⁰</b></div></div>
- <div id="xiBurst" class="burst hidden"><span>Ξ</span><div><b>EMERGÊNCIA Ξ DETETADA</b><small>critério de integração operacional satisfeito</small></div></div>
-</main>
-<aside id="observatory" class="glass inspector">
- <div class="between"><span class="overline">OBSERVATÓRIO</span><span class="mono" id="liveClock">t = 0.00</span></div>
- <div class="metric-hero"><div class="metric-small">ÍNDICE Ξ <span class="hypothesis">HIPÓTESE</span></div><strong id="xiReading">0.000</strong><small id="xiState">A formar estrutura ...</small></div>
- <canvas id="xiChart" class="trend" width="300" height="90"></canvas>
- <div class="readouts">
-  <div class="metric-row"><span><i class="bullet orange"></i><b>E</b><small>Energia normalizada</small></span><div class="bar"><div id="eBar"></div></div><output id="eReading">0.00</output></div>
-  <div class="metric-row"><span><i class="bullet cyan"></i><b>Λ</b><small>Ordem espectral</small></span><div class="bar"><div id="lBar"></div></div><output id="lReading">0.00</output></div>
-  <div class="metric-row"><span><i class="bullet violet"></i><b>Φ</b><small>Integração estatística</small></span><div class="bar"><div id="pBar"></div></div><output id="pReading">0.00</output></div>
- </div>
- <div class="measuregrid"><div><small>Equilíbrio relativo</small><b id="balanceReading">0%</b></div><div><small>Entropia H</small><b id="entropyReading">0 bits</b></div><div><small>Densidade de energia</small><b id="energyReading">0</b></div><div><small>∫ caminhos |A|²</small><b id="feynmanReading">0</b></div></div>
- <div class="separator"></div>
- <div class="between"><span class="overline">EVENTOS OBSERVADOS</span><span class="muted tiny">DADOS REAIS DO MODELO</span></div><div id="eventLog" class="eventlog"><div class="logrow"><i></i><div><strong>Condições iniciais</strong><small>O campo foi inicializado</small></div></div></div>
-</aside>
-<footer class="toolbar glass">
- <div class="toolbar-group"><button id="runBtn" class="play" title="Pausar / retomar">Ⅱ <span>Pausar</span></button><button id="stepBtn" title="Avançar um passo">⏭</button><button id="resetBtn" title="Reiniciar com a mesma semente">↺</button></div>
- <div class="toolbar-divider"></div>
- <div class="toolbar-group"><button id="orbitBtn" class="chosen">◎ 360°</button><button id="flyBtn">⌁ Voar</button><button id="autoBtn">◌ Auto</button></div>
- <div class="toolbar-divider"></div><div class="toolbar-group"><button id="holoBtn">◈ Holografia</button><button id="settingsBtn">⚙ Ajustes</button><button id="pathsBtn">∫ Feynman</button></div>
- <div class="toolbar-divider"></div><div class="toolbar-group compact"><span>RITMO</span><select id="speedSelect" aria-label="Velocidade"><option value=".5">0.5×</option><option value="1" selected>1×</option><option value="3">3×</option><option value="8">8×</option></select></div>
- <button id="exportBtn" class="export" title="Exportar medições">↓ CSV</button>
+<nav class="layers" aria-label="Camadas ontológicas">
+  <button data-focus="omega" class="layer active" title="Ω · Possibilidade"><span>Ω</span><small>Origem</small></button>
+  <button data-focus="energy" class="layer" title="E · Energia"><span>E</span><small>Energia</small></button>
+  <button data-focus="frequency" class="layer" title="Λ · Frequência"><span>Λ</span><small>Ritmo</small></button>
+  <button data-focus="information" class="layer" title="Φ · Informação integrada"><span>Φ</span><small>Padrão</small></button>
+  <button data-focus="emergence" class="layer" title="Ξ · Estruturas confirmadas no modelo"><span>Ξ</span><small>Emergência</small></button>
+</nav>
+<section class="scenehead"><span class="eyebrow" id="sceneEyebrow">Ω · POSSIBILIDADE</span><h1 id="sceneTitle">O campo de possibilidades</h1></section>
+<div id="layerHint" class="layerhint">Arrasta para explorar · roda para mudar a escala</div>
+<div class="observatory" id="observatory">
+  <div class="metric"><span>E</span><b id="eReading">—</b></div><div class="metric"><span>Λ</span><b id="lReading">—</b></div><div class="metric"><span>Φ</span><b id="pReading">—</b></div><div class="metric"><span>Ξ</span><b id="xiReading">—</b></div>
+</div>
+<div class="xi-only hidden" id="xiOnly"><div class="xi-status" id="xiStatus">NENHUMA EMERGÊNCIA VALIDADA</div><div id="xiEvidence" class="xiEvidence"></div></div>
+<div id="xiBurst" class="emergence-toast hidden"><strong>Ξ</strong><span>ESTRUTURA CONFIRMADA NO MODELO</span></div>
+<div class="scaleIndicator"> <span id="cameraReadout">360°</span><i>·</i><span id="scaleReadout">10⁰</span></div>
+<footer class="dock">
+ <button id="runBtn" class="run" title="Pausar / continuar" aria-label="Pausar">Ⅱ</button>
+ <button id="resetBtn" title="Recomeçar a simulação" aria-label="Reiniciar">↺</button>
+ <div class="split"></div>
+ <button id="orbitBtn" class="selected" title="Câmara orbital 360°">360°</button>
+ <button id="flyBtn" title="Voar · WASD Q/E">⌁</button>
+ <button id="autoBtn" class="selected" title="Câmara autónoma">◎</button>
+ <div class="split"></div>
+ <button id="holoBtn" title="Projeção de observáveis">◈</button>
+ <button id="pathsBtn" title="Caminhos de Feynman (ilustração)">∫</button>
+ <button id="exportBtn" title="Exportar medições em CSV">↓</button>
 </footer>
-<section id="scientificPanel" class="modalback hidden" aria-modal="true" role="dialog" aria-labelledby="modalHeading"><div class="modal glass"><button class="modalClose" id="closeModal">×</button><span class="overline">Ω / CADERNO CIENTÍFICO</span><h2 id="modalHeading">O que está realmente a ser simulado?</h2>
- <p><b>Ontologia ΞΦΛE:</b> Ω = domínio de estados possíveis; E = substrato energético; Λ = estrutura frequencial; Φ = informação integrada; Ξ = índice integrado. Esta interpretação é uma proposta de investigação, não uma teoria física estabelecida.</p>
- <h3>1 · Campo físico</h3><p class="equation">∂²u/∂t² = c² ∇²u, &nbsp; u(x,t) = ∑ Aⱼ cos(kⱼ·x − ωⱼt + θⱼ), &nbsp; ωⱼ = c|kⱼ|</p><p>A solução usa 17 modos de um <b>campo escalar sem massa</b> em unidades adimensionais. A energia calculada é <span class="inline-equation">ρ = ½[(∂ₜu)² + c²|∇u|²]</span>. As amplitudes e fases alteram o estado inicial.</p>
- <h3>2 · Planck, Einstein, Fourier</h3><p class="equation">E = hν = ℏω &nbsp; · &nbsp; E₀ = mc² &nbsp; · &nbsp; Ũ(ω) = ∫ u(t) e<sup>−iωt</sup> dt</p><p>São relações físicas em contextos definidos: <b>E = hν</b> para a energia de um quantum de frequência ν e <b>E₀ = mc²</b> para energia de repouso. Não se aplica automaticamente E = hν à densidade de energia do nosso campo clássico. O observatório estima Λ por transformada discreta de Fourier de uma série temporal.</p>
- <h3>3 · Informação, holografia e consciência</h3><p class="equation">H(X) = −∑ p(x) log₂p(x) &nbsp; · &nbsp; I(A;B) = H(A) + H(B) − H(A,B)</p><p>Φ é uma <b>proxy explícita</b>: menor informação mútua normalizada entre bipartições de quatro sensores binários, estimada numa janela de observações. Não é o Φ causal da IIT e não mede consciência. A opção «Holografia» mostra projeções observacionais numa superfície, <b>não</b> uma dualidade holográfica rigorosa nem um limite de Bekenstein saturado.</p>
- <h3>4 · Ξ: integração e emergência operacional</h3><p class="equation">Ξ̂ = Ê × Λ̂ × Φ̂ &nbsp; · &nbsp; B = min(Ê,Λ̂,Φ̂) / max(Ê,Λ̂,Φ̂)</p><p>Esta é uma discretização simples do núcleo <span class="inline-equation">Ξ = ∫ ΦΛE dω</span>. O brilho de emergência aparece se Ξ̂ ultrapassar o limiar escolhido e se B ≥ 0,25, de forma sustentada. Trata-se de <b>um critério operacional visual</b>, não de prova de que a existência foi gerada a partir do nada.</p>
- <h3>5 · Feynman: amplitudes ≠ produto Ξ</h3><p class="equation">𝒜 = ∫ 𝒟q · e<sup>iS[q]/ℏ</sup>, &nbsp; P ∝ |𝒜|²</p><p>A vista ∫ desenha 40 percursos exemplificativos e as respetivas fases de ação. A amostra é ilustrativa, <b>não</b> uma quadratura rigorosa do integral de Feynman; a sua soma não é substituída pelo produto ΦΛE.</p>
- <h3>6 · Limites honestos</h3><p>Ω é descrito na ontologia como infinito, eterno e sem escala. Um navegador computa uma aproximação finita numa janela móvel; o tempo é o parâmetro <b>do modelo</b>, não «o tempo de Ω». O zoom recorre a reamostragem por níveis para preservar navegação sem parede, não a física validada entre escalas de Planck e escalas cosmológicas. Não modelamos gravidade quântica, universo real, nascimento de consciência nem cosmologia observacional.</p>
- <button class="goBack" id="closeBottom">Voltar à sandbox →</button></div></section>
-<div id="toast" role="status"></div><script>/* Ω / ΞΦΛE — effective free scalar field and transparent diagnostic indicators.
-   A finite superposition of plane waves exactly solves ∂tt u = c² Δu.
-   The mathematical field is a finite model and is not a quantum vacuum or a universe. */
-const TAU=2*Math.PI;
-const clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
-const mix=(a,b,t)=>a+(b-a)*t;
-const fract=x=>x-Math.floor(x);
-function rng(seed){let s=seed|0;return ()=>{s=(s+0x6D2B79F5)|0;let t=Math.imul(s^(s>>>15),1|s);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;};}
-const rad=(x)=>x*Math.PI/180;
-class OmegaField{
- constructor(seed=2026){this.seed=seed;this.c=1;this.t=0;this.energyGain=1;this.coherence=.74;this.modes=[];this.history=[];this.last={};this.feynman=[];this.reset();}
- reset(){this.t=0;this.history=[];const rand=rng(this.seed);this.modes=[];
- // Each mode u_j=A_j cos(k_j·x-ω_j t+δ_j) solves the massless wave equation.
- for(let j=0;j<17;j++){
-   const octave=(j-8)*.58,kmag=Math.pow(2,octave)*.46;
-   let v=[rand()*2-1,rand()*2-1,rand()*2-1];let len=Math.hypot(...v)||1;v=v.map(x=>x/len);
-   this.modes.push({k:v.map(x=>x*kmag),omega:this.c*kmag,amp:.24/(1+Math.pow(1.55,Math.abs(j-8))*.12),basePhase:(rand()*2-1)*Math.PI,seedAngle:rand()*TAU});
- }
- this.feynman=Array.from({length:40},(_,i)=>({a:(i-19.5)/19.5,noise:(rand()-.5)*1.1,p:rand()*TAU}));this.last={E:0,L:0,P:0,Xi:0,B:0,pathP:0,entropy:0,energy:0,phaseR:0};
- }
- phase(mode){return mode.basePhase*(1-this.coherence)+mode.seedAngle*this.coherence*.27;}
- sample(x,y,z,scale=1){let u=0,ut=0,gx=0,gy=0,gz=0;for(const m of this.modes){const f= m.k[0]*x*scale+m.k[1]*y*scale+m.k[2]*z*scale-m.omega*this.t+this.phase(m),sn=Math.sin(f),co=Math.cos(f);
-u+=m.amp*co;const a=m.amp*sn;ut+=m.omega*a;gx-=m.k[0]*a;gy-=m.k[1]*a;gz-=m.k[2]*a;}u*=this.energyGain;ut*=this.energyGain;gx*=this.energyGain;gy*=this.energyGain;gz*=this.energyGain;
-const energy=.5*(ut*ut+this.c*this.c*(gx*gx+gy*gy+gz*gz));return {u,ut,energy};}
- // Feynman phase sampler for a finite, deliberately non-exhaustive set of paths.
- // Illustrative complex sum, NOT normalized path integral and NOT a quantum claim.
- paths(hbar=.75){let re=0,im=0;const paths=[];
- for(let j=0;j<this.feynman.length;j++){const {a,noise,p}=this.feynman[j];let S=0;const N=30,dt=1/N;
- for(let i=0;i<N;i++){const t=(i+.5)*dt;const u=Math.sin(Math.PI*t)*(a*.85+noise*.28*Math.sin(4*Math.PI*t+p));const du=Math.PI*Math.cos(Math.PI*t)*(a*.85+noise*.28*Math.sin(4*Math.PI*t+p))+Math.sin(Math.PI*t)*(noise*.28*4*Math.PI*Math.cos(4*Math.PI*t+p));
-S+=.5*(du*du-.9*u*u)*dt;}
- const ph=S/hbar;re+=Math.cos(ph);im+=Math.sin(ph);paths.push({a,noise,p,phase:ph});}
- return {coherence:Math.hypot(re,im)/this.feynman.length,prob:(re*re+im*im)/(this.feynman.length**2),paths};}
- record(dt=.047){this.t+=dt;const sites=[[-1.2,-1.1,.7],[1.2,-1.1,-.6],[-1.2,1.1,-.5],[1.2,1.1,.7],[0,.9,1.1],[.9,0,-1.0]];
- const sampled=sites.map(p=>this.sample(...p));let bin=0;for(let i=0;i<4;i++)if(sampled[i].u>0)bin|=1<<i;
- this.history.push({t:this.t,s:sampled[4].u,bin,energy:sampled.reduce((x,p)=>x+p.energy,0)/sites.length});if(this.history.length>180)this.history.shift();return this.measure();
+<section id="scientificPanel" class="modalback hidden" role="dialog" aria-modal="true" aria-labelledby="aboutTitle"><article class="modal">
+ <button id="closeModal" class="close" aria-label="Fechar">×</button><span class="eyebrow">ΞΦΛE / CADERNO DE FÍSICA</span><h2 id="aboutTitle">O que é real neste modelo?</h2>
+ <p>O campo evolui autonomamente, sem parâmetros ajustáveis pelo observador. A experiência 3D é um laboratório de física efetiva, não uma simulação comprovada da origem do universo.</p>
+ <div class="sciencegrid"><section><h3>Campo e energia</h3><div class="formula">ü + γu̇ = ∇²u + u − u³<br>V(u) = ¼(u² − 1)²</div><p>Modelo escalar não linear de Klein–Gordon com dissipação e condições periódicas. A instabilidade do estado quase uniforme produz domínios sem programar a forma final.</p></section>
+ <section><h3>Estado inicial necessário</h3><div class="formula">u(x,0) ≃ 0 + δu(x)<br>u̇(x,0) = 0</div><p>A equação isolada não escolhe uma solução. É necessário assumir estado e contorno: perturbação pequena, determinística e fixa, sem controlos no ecrã. Não é o vácuo quântico nem geração a partir do nada.</p></section>
+ <section><h3>Lambda e Phi</h3><div class="formula">Λ : DFT temporal<br>Φ : I(A;B) de Shannon</div><p>Λ é concentração do espectro temporal; Φ é informação mútua espacial normalizada. Esta Φ é uma aproximação estatística, <b>não</b> a medida causal da IIT nem prova de consciência.</p></section>
+ <section><h3>Integral Ξ</h3><div class="formula">Ξ̂ = Ê · Λ̂ · Φ̂</div><p>Discretização operacional de um único canal da integral proposta Ξ = ∫ΦΛE dω. Ξ é diagnóstico exploratório; <b>não</b> interfere nas leis de evolução. Não existe, por enquanto, uma equação validada capaz de produzir existência a partir de Ξ.</p></section>
+ <section><h3>Confirmação na camada Ξ</h3><p>Só surgem domínios calculados na malha física que se formaram após a instabilidade, coexistem em estados opostos e persistem entre medições sucessivas, com correspondência espacial. Pequenos picos, ruído e eventos passageiros não são mostrados. «Confirmada» significa <b>confirmada numericamente neste ensaio</b>, não experimentalmente na natureza.</p></section>
+ <section><h3>Holografia, Feynman, escala</h3><p>A fronteira ◈ é visualização de dados, não dualidade holográfica demonstrada. O símbolo ∫ ilustra a soma complexa e<sup>iS/ℏ</sup>, independente de Ξ. O zoom é logarítmico e a computação finita: a infinitude de Ω é uma hipótese ontológica, não capacidade real do navegador.</p></section></div>
+ <div class="aboutFoot"><span>Unidades internas adimensionais · tempo de simulação não equivale ao tempo cosmológico</span><button id="closeBottom">Voltar ao universo →</button></div>
+ </article></section>
+<div id="toast" role="status"></div>
+<script>/** Ω · ΞΦΛE / v3.
+ * A minimal, fixed, reproducible effective physics experiment.
+ * Damped nonlinear Klein–Gordon scalar field in a periodic 3D numerical domain:
+ *   u_tt + gamma u_t = c² ∆u + u − u³
+ * from V(u)=(u²−1)²/4.  This is an established effective field MODEL,
+ * NOT a derivation of cosmogenesis from ΞΦΛE, not a quantum vacuum, not consciousness.
+ * E, Λ, Φ and Ξ are observational diagnostics, never forces driving the field.
+ */
+const TAU = 2*Math.PI;
+const clamp = (v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+class OmegaField {
+  constructor(){this.N=26;this.L=16;this.dx=this.L/this.N;this.dt=.07;this.gamma=.16;this.c=1;this.mass2=1;this.t=0;this.steps=0;this.initAmplitude=.014;this.u=new Float64Array(this.N**3);this.v=new Float64Array(this.N**3);this.force=new Float64Array(this.N**3);this.hist=[];this.last={};this.candidates={positive:null,negative:null};this.confirmed=[];this.eventSerial=0;this.events=[];this.reset();}
+  get size(){return this.N**3;}
+  hash(i){let x=(i*1664525+1013904223)^0x63D83595;x=Math.imul(x^(x>>>16),0x7feb352d);x=Math.imul(x^(x>>>15),0x846ca68b);return ((x^(x>>>16))>>>0)/4294967296;}
+  idx(x,y,z){const N=this.N;return ((x+N)%N)+N*((y+N)%N)+N*N*((z+N)%N);}
+  reset(){this.t=0;this.steps=0;this.hist=[];this.events=[];this.eventSerial=0;this.candidates={positive:null,negative:null};this.confirmed=[];const N=this.N;
+    // Reproducible zero-mean small perturbation of an unstable u=0 state.
+    // Its nonzero amplitude is an explicit physical/numerical assumption, not an inferred creation ex nihilo.
+    let mean=0;for(let i=0;i<this.size;i++){const a=this.hash(i*13+1),b=this.hash(i*31+3);this.u[i]=this.initAmplitude*(a+b-1);mean+=this.u[i];this.v[i]=0;}
+    mean/=this.size;for(let i=0;i<this.size;i++)this.u[i]-=mean;
+    this.computeForce();this.last={t:0,E:0,L:0,P:0,Xi:0,B:0,energy:0,energyDensity:0,kinetic:0,meanAbs:0,entropy:0,confirmed:0,events:[]};
+  }
+  computeForce(){const N=this.N,u=this.u,f=this.force,d=1/(this.dx*this.dx);
+    for(let z=0;z<N;z++){const zm=(z+N-1)%N,zp=(z+1)%N;for(let y=0;y<N;y++){const ym=(y+N-1)%N,yp=(y+1)%N;for(let x=0;x<N;x++){const xm=(x+N-1)%N,xp=(x+1)%N,i=x+N*(y+N*z),q=u[i];const lap=(u[xp+N*(y+N*z)]+u[xm+N*(y+N*z)]+u[x+N*(yp+N*z)]+u[x+N*(ym+N*z)]+u[x+N*(y+N*zp)]+u[x+N*(y+N*zm)]-6*q)*d;f[i]=lap+q-q*q*q;}}}
+  }
+  record(dt=this.dt){const n=Math.max(1,Math.round(dt/this.dt));for(let j=0;j<n;j++)this.step();return this.measure();}
+  step(){const h=this.dt,drag=Math.exp(-this.gamma*h/2);for(let i=0;i<this.size;i++){this.v[i]*=drag;this.v[i]+=.5*h*this.force[i];this.u[i]+=h*this.v[i];}
+    this.computeForce();for(let i=0;i<this.size;i++){this.v[i]+=.5*h*this.force[i];this.v[i]*=drag;}
+    this.t+=h;this.steps++;
+    if(this.steps%3===0)this.measure();
+  }
+  // Periodic tricubic-style rendering is unnecessary: trilinear interpolation is conservative enough for visualization.
+  sample(x,y,z,scale=1){const N=this.N,map=p=>{let q=(((p*scale+this.L/2)/this.L)*N)%N;if(q<0)q+=N;const lo=Math.floor(q);return [lo,(lo+1)%N,q-lo];};
+    const [x0,x1,fx]=map(x),[y0,y1,fy]=map(y),[z0,z1,fz]=map(z);
+    const s=a=>{let c00=a[this.idx(x0,y0,z0)]*(1-fx)+a[this.idx(x1,y0,z0)]*fx,c10=a[this.idx(x0,y1,z0)]*(1-fx)+a[this.idx(x1,y1,z0)]*fx,c01=a[this.idx(x0,y0,z1)]*(1-fx)+a[this.idx(x1,y0,z1)]*fx,c11=a[this.idx(x0,y1,z1)]*(1-fx)+a[this.idx(x1,y1,z1)]*fx;return (c00*(1-fy)+c10*fy)*(1-fz)+(c01*(1-fy)+c11*fy)*fz;};
+    const u=s(this.u),ut=s(this.v);const i=this.idx(x0,y0,z0),en=this.cellEnergy(i,x0,y0,z0);return {u,ut,energy:en};}
+  cellEnergy(i,x,y,z){const h=this.dx,u=this.u,v=this.v,ux=(u[this.idx(x+1,y,z)]-u[this.idx(x-1,y,z)])/(2*h),uy=(u[this.idx(x,y+1,z)]-u[this.idx(x,y-1,z)])/(2*h),uz=(u[this.idx(x,y,z+1)]-u[this.idx(x,y,z-1)])/(2*h);const q=u[i];return .5*v[i]**2+.5*(ux*ux+uy*uy+uz*uz)+.25*(q*q-1)**2;}
+  spectral(){const samples=this.hist.slice(-96);const N=samples.length;if(N<28)return {L:0,frequency:0,power:0};const mean=samples.reduce((a,r)=>a+r.probe,0)/N;let total=0,maxPower=0,maxK=0;const powers=[];
+    for(let k=1;k<Math.min(32,Math.floor(N/2));k++){let re=0,im=0;for(let i=0;i<N;i++){const w=.5*(1-Math.cos(TAU*i/(N-1))),ang=TAU*k*i/N,z=(samples[i].probe-mean)*w;re+=z*Math.cos(ang);im-=z*Math.sin(ang);}const p=re*re+im*im;powers.push(p);total+=p;if(p>maxPower){maxPower=p;maxK=k;}}
+    if(total<.00008)return {L:0,frequency:0,power:total};let H=0;for(const a of powers){const p=a/total;if(p>1e-10)H-=p*Math.log(p);}const L=clamp(1-H/Math.log(Math.max(2,powers.length)));return {L,frequency:maxK/(N*this.dt*3),power:total};
+  }
+  information(){const N=this.N;let mis=[];let balanced=0;const u=this.u;
+    for(const dir of [[2,0,0],[0,2,0],[0,0,2]]){const joint=[0,0,0,0],a=[0,0],b=[0,0];for(let z=0;z<N;z+=2)for(let y=0;y<N;y+=2)for(let x=0;x<N;x+=2){const x1=u[this.idx(x,y,z)]>0?1:0,x2=u[this.idx(x+dir[0],y+dir[1],z+dir[2])]>0?1:0;joint[x1*2+x2]++;a[x1]++;b[x2]++;}
+      const total=joint.reduce((v,w)=>v+w,0),h=c=>{let res=0;for(const count of c){const p=count/total;if(p>0)res-=p*Math.log2(p);}return res;};const Hx=h(a),Hy=h(b),Hxy=h(joint),I=Math.max(0,Hx+Hy-Hxy);mis.push((Hx>.09&&Hy>.09)?clamp(I/Math.min(Hx,Hy)):0);balanced+=Math.min(a[0],a[1])/total;
+    }
+    return {P:Math.min(...mis),entropy:balanced/3};
+  }
+  measure(){let energy=0,kinetic=0,meanAbs=0;const N=this.N;for(let z=0;z<N;z+=2)for(let y=0;y<N;y+=2)for(let x=0;x<N;x+=2){const i=this.idx(x,y,z),u=this.u[i];energy+=this.cellEnergy(i,x,y,z);kinetic+=.5*this.v[i]**2;meanAbs+=Math.abs(u);}
+    const count=(N/2)**3;energy/=count;kinetic/=count;meanAbs/=count;
+    const probe=this.u[this.idx(3,7,13)];this.hist.push({t:this.t,probe});if(this.hist.length>180)this.hist.shift();const {L,frequency,power}=this.spectral(),{P,entropy}=this.information();
+    // E is a fixed-scale normalization of the computed energy density, not an adjustable gain.
+    const E=clamp(energy/(energy+.25)),Xi=E*L*P,B=(Math.min(E,L,P)+1e-9)/(Math.max(E,L,P)+1e-9);
+    if(this.steps%9===0)this.detect(meanAbs,{E,L,P,Xi,B,power});
+    this.last={t:this.t,E,L,P,Xi,B,energy,energyDensity:energy,kinetic,meanAbs,entropy,frequency,power,confirmed:this.confirmed.length,events:this.confirmed.map(e=>({id:e.id,sign:e.sign,size:e.size,at:e.at}))};
+    return this.last;
+  }
+  // Connected domains of the nonlinear field only. One-pixel/one-frame spikes are rejected.
+  // Threshold 0.6 is relative to the double-well minima ±1, not a user-selected Xi cutoff.
+  detect(meanAbs,metrics){const N=this.N,S=this.size,threshold=.60,minimum=Math.max(60,Math.floor(S*.012)),components={positive:null,negative:null};
+    for(const sign of [1,-1]){const passed=new Uint8Array(S),visited=new Uint8Array(S);for(let i=0;i<S;i++)passed[i]=this.u[i]*sign>=threshold?1:0;let best=[];
+      for(let z=0;z<N;z++)for(let y=0;y<N;y++)for(let x=0;x<N;x++){const start=this.idx(x,y,z);if(!passed[start]||visited[start])continue;const queue=[start];visited[start]=1;
+        for(let head=0;head<queue.length;head++){const id=queue[head],cx=id%N,cy=Math.floor(id/N)%N,cz=Math.floor(id/(N*N));for(const j of [this.idx(cx+1,cy,cz),this.idx(cx-1,cy,cz),this.idx(cx,cy+1,cz),this.idx(cx,cy-1,cz),this.idx(cx,cy,cz+1),this.idx(cx,cy,cz-1)])if(passed[j]&&!visited[j]){visited[j]=1;queue.push(j);}}
+        if(queue.length>best.length)best=queue;
+      }
+      if(best.length>=minimum){const mask=new Uint8Array(S);for(const id of best)mask[id]=1;components[sign===1?'positive':'negative']={mask,ids:best,size:best.length,sign};}
+    }
+    // Non-trivial coexistence plus growth out of the unstable background are necessary.
+    const coexist=!!(components.positive&&components.negative&&meanAbs>.50&&metrics.L>.10&&metrics.P>.10&&metrics.B>.20&&metrics.Xi>.025&&metrics.power>.00008);
+    const active=[];
+    for(const name of ['positive','negative']){
+      const c=coexist?components[name]:null;const prev=this.candidates[name];if(!c){this.candidates[name]=null;continue;}
+      let holds=1;if(prev){let overlap=0;for(const id of c.ids)if(prev.mask[id])overlap++;const jaccard=overlap/(c.size+prev.size-overlap);if(jaccard>=.74)holds=prev.holds+1;}
+      this.candidates[name]={...c,holds};
+      // Eight stable observations span 72 integration steps: temporal persistence check.
+      if(holds>=8){let existing=this.confirmed.find(e=>e.sign===c.sign);if(!existing){existing={id:++this.eventSerial,sign:c.sign,at:this.t,size:c.size,mask:c.mask,holds};this.events.push({id:existing.id,sign:existing.sign,time:this.t,size:c.size});}
+        existing.size=c.size;existing.mask=c.mask;existing.holds=holds;active.push(existing);}
+    }
+    this.confirmed=active;
+  }
+  paths(hbar=.75){ // Separate illustrative Feynman phase sum: not a field equation and not Ξ.
+    let re=0,im=0;for(let k=0;k<24;k++){const a=(k-11.5)/11.5;const S=.5*a*a+.02*Math.sin(k*2.37);re+=Math.cos(S/hbar);im+=Math.sin(S/hbar);}return {prob:(re*re+im*im)/576};
+  }
 }
- measure(){const rows=this.history,last=rows[rows.length-1];if(!last)return this.last;
- // Hann window temporal DFT. No interpolation/synthetic peaks.
- const recent=rows.slice(-96),N=recent.length,amps=[];let sum=0;
- if(N>=24){const mean=recent.reduce((a,r)=>a+r.s,0)/N;for(let k=1;k<Math.min(34,Math.floor(N/2));k++){let re=0,im=0;for(let i=0;i<N;i++){const w=.5*(1-Math.cos(TAU*i/(N-1))),phase=TAU*k*i/N;
-re+=(recent[i].s-mean)*w*Math.cos(phase);im-=(recent[i].s-mean)*w*Math.sin(phase);}const power=re*re+im*im;amps.push(power);sum+=power;}}
- let hspec=0;for(const power of amps){const p=power/(sum||1);if(p>1e-12)hspec-=p*Math.log(p);}const L=amps.length>1?clamp(1-hspec/Math.log(amps.length)):0;
- // Partitions of four recorded sign sensors, with observed Shannon mutual info.
- // This is a correlation proxy, NOT IIT integrated causal information Phi.
- const counts=new Array(16).fill(0);for(const row of rows.slice(-128))counts[row.bin]++;
- const total=counts.reduce((a,b)=>a+b,0);function H(subset){const vals=new Array(1<<subset.length).fill(0);for(let mask=0;mask<16;mask++){let idx=0;for(let i=0;i<subset.length;
-i++)idx|=((mask>>subset[i])&1)<<i;vals[idx]+=counts[mask];}let h=0;for(const n of vals){const p=n/(total||1);if(p>0)h-=p*Math.log2(p);}return h;}
- const h4=H([0,1,2,3]);const partitions=[[[0,1],[2,3]],[[0,2],[1,3]],[[0,3],[1,2]]];
- let P=0;if(rows.length>=30){P=Math.min(...partitions.map(([a,b]) => {const denom=Math.max(.05,Math.min(H(a),H(b)));return clamp((H(a)+H(b)-h4)/denom);}));}
- const energy=last.energy;const E=clamp(energy/(energy+.064));
- const eps=1e-8,B=(Math.min(E,L,P)+eps)/(Math.max(E,L,P)+eps);
- const Xi=E*L*P; // One-point spectral/discrete mode estimate, not physically proven.
- const phases=this.modes.map(m=>m.omega*this.t+this.phase(m)),phR=Math.hypot(phases.reduce((a,x)=>a+Math.cos(x),0),phases.reduce((a,x)=>a+Math.sin(x),0))/phases.length;
- this.last={E,L,P,Xi,B,energy,phaseR:phR,entropy:h4,pathP:this.paths(.75).prob,t:this.t};return this.last;
- }
-}
-function physicsTests(){const f=new OmegaField();const x=[.2,.4,-.8];const d=.0001;const u=f.sample(...x).u;const lap=([0,1,2].map(j=>{const p=x.slice();p[j]+=d;const q=x.slice();
-q[j]-=d;return (f.sample(...p).u+f.sample(...q).u-2*u)/(d*d);}).reduce((a,b)=>a+b,0));const t=f.t;f.t=t+d;const p=f.sample(...x).u;f.t=t-d;const q=f.sample(...x).u;f.t=t;const tt=(p+q-2*u)/(d*d);
-return {waveResidual:tt-f.c*f.c*lap,energyPositive:f.sample(...x).energy>=0};}
-</script>
-<script>
-const $=id=>document.getElementById(id);
-const field=new OmegaField(2026);
-let focus='omega',paused=false,speed=1,zoom=0,fly=false,auto=true,hologram=false,paths=false,emergence=false,stableCount=0,threshold=.055,prevXi=0,lastLog='',chart=[],tick=0,last=0,frame=0,drawDirty=true;
+function physicsTests(){const f=new OmegaField(),before=f.measure().energy;for(let i=0;i<100;i++)f.step();const after=f.measure().energy;return {initial:before,after,finite:Number.isFinite(after),states:f.size,meanAbs:f.last.meanAbs,fieldPositive:f.last.energy>=0,initialEvents:0};}
 
+
+const $=id=>document.getElementById(id);
+const field=new OmegaField();
+let focus='omega',paused=false,zoom=0,fly=false,auto=true,hologram=false,paths=false,last=0,frame=0,drawDirty=true,accum=0,sampleCache=null,lastEventID=0;
 const canvas=$('universe');let vw=innerWidth,vh=innerHeight,dpr=1;
-const pointer=new Map();const keys=new Set();const camera={yaw:.65,pitch:.27,dist:17,target:[0,0,0],position:[0,0,17]},bgRand=(seed)=>{let x=seed|0;return ()=>{x^=x<<13;x^=x>>>17;
-x^=x<<5;return (x>>>0)/4294967296;}};
-const rnd=bgRand(59483);const nodes=[];
-// Deterministically sample a 3D observation volume; nodes do not move randomly.
-for(let i=0;i<5900;i++){
- const u=rnd()*2-1,a=rnd()*TAU,r=1+Math.pow(rnd(),.64)*6.8,c=Math.sqrt(1-u*u);
- const x=Math.cos(a)*r*c,y=u*r,z=Math.sin(a)*r*c;
- nodes.push({x,y,z,kind:0});
+const pointer=new Map(),keys=new Set(),camera={yaw:.7,pitch:.22,dist:19,target:[0,0,0],position:[0,0,19]};
+const bgRand=seed=>{let x=seed|0;return ()=>{x^=x<<13;x^=x>>>17;x^=x<<5;return (x>>>0)/4294967296;}};
+const rnd=bgRand(59483),nodes=[],stars=[],holoNodes=[];
+// The visible sampling cloud has no spherical boundary; the numerical solver is periodic.
+for(let i=0;i<7900;i++){
+ const gauss=()=>Math.sqrt(-2*Math.log(Math.max(1e-9,rnd())))*Math.cos(TAU*rnd());
+ const x=gauss()*7.8,y=gauss()*6.8,z=gauss()*7.8;nodes.push({x,y,z});
 }
-const stars=[];for(let i=0;i<950;i++){let x=(rnd()-.5)*110,y=(rnd()-.5)*110,z=(rnd()-.5)*110;stars.push({x,y,z,kind:2});}
-const holoNodes=[];for(let i=0;i<1250;i++){let y=1-2*(i+.5)/1250,r=Math.sqrt(1-y*y),a=i*2.399963;holoNodes.push({x:r*Math.cos(a)*5.7,y:y*5.7,z:r*Math.sin(a)*5.7,kind:1});}
+for(let i=0;i<460;i++){stars.push({x:(rnd()-.5)*190,y:(rnd()-.5)*190,z:(rnd()-.5)*190});}
+// The holographic overlay is deliberately a bounded diagnostic surface, never Ω's wall.
+for(let i=0;i<1200;i++){const y=1-2*(i+.5)/1200,r=Math.sqrt(1-y*y),a=i*2.399963;holoNodes.push({x:r*Math.cos(a)*6,y:y*6,z:r*Math.sin(a)*6});}
 let gl=canvas.getContext('webgl2',{alpha:false,antialias:true,powerPreference:'high-performance'});
 let ctx2=null,program=null,buffer=null,loc={};
 if(gl){
@@ -353,149 +176,110 @@ if(gl){
  vec3 c=mix(indigo,cyan,clamp((vSign+.5)*.55,0.,1.));
  if(uFocus>1.5&&uFocus<2.5)c=mix(sea,gold,clamp(vBright,0.,1.));
  if(uFocus>2.5&&uFocus<3.5)c=mix(indigo,cyan,clamp(vBright,0.,1.));
- if(uFocus>3.5)c=mix(c,gold,clamp(uXi*3.,0.,.85));
- if(vSign>3.5)c=vec3(.33,.52,.67);else if(vSign>2.5)c=mix(vec3(.24,.77,.85),vec3(.63,.43,.90),vBright);
+ if(uFocus>3.5)c=mix(vec3(.75,.62,.94),gold,step(0.,vSign));
+ if(vSign>3.5)c=vec3(.24,.39,.51);else if(vSign>2.5)c=mix(vec3(.25,.69,.79),vec3(.63,.43,.90),vBright);
  float alpha=(soft*.85+halo)*clamp(.08+vBright*.95,0.,1.)*(vSign>3.5?.24:1.);
  frag=vec4(c,alpha);}
  `;
- function shader(kind,src){const s=gl.createShader(kind);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));
-return s;}
- try{program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,vs));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));
-gl.useProgram(program);buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);loc={p:gl.getAttribLocation(program,'aPos'),d:gl.getAttribLocation(program,'aDat')};gl.enableVertexAttribArray(loc.p);
-gl.vertexAttribPointer(loc.p,3,gl.FLOAT,false,20,0);gl.enableVertexAttribArray(loc.d);gl.vertexAttribPointer(loc.d,2,gl.FLOAT,false,20,12);for(const k of ['uCam','uRight','uUp','uFwd','uAspect','uTan','uFocus','uXi','uTime'])loc[k]=gl.getUniformLocation(program,k);
-gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);gl.disable(gl.DEPTH_TEST);}catch(e){console.error('WebGL initialization error',e);gl=null;}
+ function shader(kind,src){const s=gl.createShader(kind);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
+ try{program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,vs));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));gl.useProgram(program);buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);loc={p:gl.getAttribLocation(program,'aPos'),d:gl.getAttribLocation(program,'aDat')};gl.enableVertexAttribArray(loc.p);gl.vertexAttribPointer(loc.p,3,gl.FLOAT,false,20,0);gl.enableVertexAttribArray(loc.d);gl.vertexAttribPointer(loc.d,2,gl.FLOAT,false,20,12);for(const k of ['uCam','uRight','uUp','uFwd','uAspect','uTan','uFocus','uXi','uTime'])loc[k]=gl.getUniformLocation(program,k);gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE);gl.disable(gl.DEPTH_TEST);}catch(e){console.error('WebGL initialization error',e);gl=null;}
 }
 if(!gl){ctx2=canvas.getContext('2d');}
-function resize(){dpr=Math.min(window.devicePixelRatio||1,1.6);vw=innerWidth;vh=innerHeight;canvas.width=Math.round(vw*dpr);canvas.height=Math.round(vh*dpr);if(gl)gl.viewport(0,0,canvas.width,canvas.height);
-drawDirty=true;}addEventListener('resize',resize);resize();
-const normalize=x=>{const n=Math.hypot(...x)||1;return x.map(v=>v/n);};const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];const sub=(a,b)=>a.map((x,i)=>x-b[i]);
-const add=(a,b,k=1)=>a.map((x,i)=>x+b[i]*k);
+function resize(){dpr=Math.min(window.devicePixelRatio||1,1.6);vw=innerWidth;vh=innerHeight;canvas.width=Math.round(vw*dpr);canvas.height=Math.round(vh*dpr);if(gl)gl.viewport(0,0,canvas.width,canvas.height);drawDirty=true;}addEventListener('resize',resize);resize();
+const normalize=x=>{const n=Math.hypot(...x)||1;return x.map(v=>v/n);};const cross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];const sub=(a,b)=>a.map((x,i)=>x-b[i]);const add=(a,b,k=1)=>a.map((x,i)=>x+b[i]*k);
 function camBasis(){const yaw=camera.yaw,pitch=camera.pitch;
- let cam;if(!fly){cam=[camera.target[0]+camera.dist*Math.sin(yaw)*Math.cos(pitch),camera.target[1]+camera.dist*Math.sin(pitch),camera.target[2]+camera.dist*Math.cos(yaw)*Math.cos(pitch)];
-camera.position=cam;}
+ let cam;if(!fly){cam=[camera.target[0]+camera.dist*Math.sin(yaw)*Math.cos(pitch),camera.target[1]+camera.dist*Math.sin(pitch),camera.target[2]+camera.dist*Math.cos(yaw)*Math.cos(pitch)];camera.position=cam;}
  else cam=camera.position;
- let fwd=fly?normalize([Math.sin(yaw)*Math.cos(pitch),-Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch)]):normalize(sub(camera.target,cam));const right=normalize(cross(fwd,[0,1,0])),up=normalize(cross(right,fwd));
-return {cam,fwd,right,up};}
-const focusNames={omega:['Ω / POTENCIAL ILIMITADO','Antes da forma,<br><em>a possibilidade.</em>','Ω não é um recipiente. Navega através de uma janela computável sobre possibilidades descritas por um campo físico.'],energy:['E / SUBSTRATO ENERGÉTICO','A energia é<br><em>o substrato.</em>','A densidade energética deriva das derivadas temporais e espaciais do campo, não de movimentos aleatórios.'],frequency:['Λ / OSCILAÇÃO E RESSONÂNCIA','A energia oscila.<br><em>O ritmo emerge.</em>','Os modos propagam-se com ω = c|k|; Fourier revela as frequências presentes na evolução.'],information:['Φ / INFORMAÇÃO INTEGRADA','O padrão contém<br><em>relações.</em>','As dependências entre regiões são medidas pela informação mútua de Shannon. Não são uma medida de consciência.'],emergence:['Ξ / EMERGÊNCIA DE EXISTÊNCIA','Da relação nasce<br><em>a integração.</em>','A visualização Ξ responde ao índice ΦΛE e a condições de equilíbrio medidas, em vez de uma animação com hora marcada.']};
+ let fwd=fly?normalize([Math.sin(yaw)*Math.cos(pitch),-Math.sin(pitch),Math.cos(yaw)*Math.cos(pitch)]):normalize(sub(camera.target,cam));const right=normalize(cross(fwd,[0,1,0])),up=normalize(cross(right,fwd));return {cam,fwd,right,up};}
 
+const focusNames={omega:['Ω · POSSIBILIDADE','O campo de possibilidades'],energy:['E · SUBSTRATO','Energia em evolução'],frequency:['Λ · OSCILAÇÃO','Frequências do campo'],information:['Φ · ESTRUTURA','Informação integrada'],emergence:['Ξ · EVIDÊNCIA','Estruturas confirmadas']};
 const focusIndex={omega:0,energy:2,frequency:1,information:3,emergence:4};
-function setFocus(f){focus=f;document.querySelectorAll('.step').forEach(b=>b.classList.toggle('active',b.dataset.focus===f));const info=focusNames[f];$('sceneEyebrow').textContent=info[0];
-$('sceneTitle').innerHTML=info[1];$('sceneDescription').textContent=info[2];drawDirty=true;}
-for(const b of document.querySelectorAll('.step'))b.addEventListener('click',()=>setFocus(b.dataset.focus));
-let sampleCache=null;function updateCloud(){const scale=Math.pow(10,clamp(-zoom*.33,-4,4));const list=[];const push=(p,bright,sign)=>{list.push(p.x,p.y,p.z,clamp(bright),sign);
-};
- const scaleFactor=scale;const fx=focus;
- for(const p of nodes){let m=field.sample(p.x,p.y,p.z,scaleFactor),value=clamp(m.energy/(m.energy+.1));
- let bright=fx==='energy'?value:fx==='frequency'?clamp(Math.abs(m.ut)*1.1):fx==='information'?clamp(.35*Math.abs(m.u)+.65*Math.sqrt(value)):fx==='emergence'?clamp(Math.abs(m.u)*.6+value*.4+field.last.Xi*1.4):clamp(Math.abs(m.u)*.35+value*.7);
-
- const sign=m.u>=0?1:-1;push(p,.12+.82*bright,sign);
+function setFocus(f){if(!focusNames[f])return;focus=f;document.querySelectorAll('.layer').forEach(b=>b.classList.toggle('active',b.dataset.focus===f));const info=focusNames[f];$('sceneEyebrow').textContent=info[0];$('sceneTitle').textContent=info[1];$('xiOnly').classList.toggle('hidden',f!=='emergence');$('observatory').classList.toggle('hidden',f==='emergence');drawDirty=true;sampleCache=null;updateUi();}
+for(const b of document.querySelectorAll('.layer'))b.onclick=()=>setFocus(b.dataset.focus);
+function makeCloud(){const scale=Math.pow(10,clamp(-zoom*.30,-4.5,4.5)),list=[];
+ const push=(p,bright,sign)=>list.push(p.x,p.y,p.z,clamp(bright),sign);
+ if(focus==='emergence'){
+   // ABSOLUTELY NO background nodes, decorative stars, fields, unconfirmed candidates or paths.
+   // Only voxels of temporally confirmed physical connected components are drawable.
+   for(const event of field.confirmed){
+     let count=0;const N=field.N,step=Math.max(1,Math.floor(event.size/1850));
+     for(let i=0;i<event.mask.length;i+=step){if(!event.mask[i])continue;
+       const x=i%N,y=Math.floor(i/N)%N,z=Math.floor(i/(N*N));
+       const p={x:((x+.5)/N-.5)*field.L,y:((y+.5)/N-.5)*field.L,z:((z+.5)/N-.5)*field.L};
+       const q=Math.abs(field.u[i]);push(p,clamp(.4+q*.5),event.sign);count++;if(count>=2300)break;
+     }
+   }
+   sampleCache=new Float32Array(list);return sampleCache;
  }
- if(hologram){for(const p of holoNodes){const m=field.sample(p.x,p.y,p.z,scaleFactor);push(p,.14+.86*clamp(m.energy/(m.energy+.08)),3);}}
- for(const p of stars)push(p,.15+.4*Math.sin(p.x+p.y)**2,4);
- // Emergent central concentration highlights actual high-energy points, not synthetic creation of particles.
- const arr=new Float32Array(list);sampleCache=arr;return arr;}
-function drawGL(){const basis=camBasis();gl.clearColor(.009,.021,.038,1);gl.clear(gl.COLOR_BUFFER_BIT);gl.useProgram(program);
- gl.uniform3fv(loc.uCam,basis.cam);gl.uniform3fv(loc.uRight,basis.right);gl.uniform3fv(loc.uUp,basis.up);gl.uniform3fv(loc.uFwd,basis.fwd);
- gl.uniform1f(loc.uAspect,vw/vh);gl.uniform1f(loc.uTan,.64);gl.uniform1f(loc.uFocus,focusIndex[focus]);gl.uniform1f(loc.uXi,emergence?field.last.Xi:0);gl.uniform1f(loc.uTime,field.t);
-
- const cloud=sampleCache||updateCloud();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,cloud,gl.DYNAMIC_DRAW);gl.drawArrays(gl.POINTS,0,cloud.length/5);
-
- if(paths){drawPathsGL();}}
-function drawPathsGL(){const V=[],n=28;for(const p of field.feynman){const ang=p.p;const points=[];for(let i=0;i<=n;i++){const q=i/n,env=Math.sin(Math.PI*q),r=env*(p.a*.85+p.noise*.28*Math.sin(4*Math.PI*q+p.p));
-points.push({x:(q-.5)*9,y:r*Math.cos(ang),z:r*Math.sin(ang)});}for(let i=0;i<n;i++){const a=points[i],b=points[i+1];for(const v of [a,b])V.push(v.x,v.y,v.z,.31+.25*Math.cos(p.phase),1.2);
-}}const arr=new Float32Array(V);gl.bufferData(gl.ARRAY_BUFFER,arr,gl.DYNAMIC_DRAW);gl.drawArrays(gl.LINES,0,arr.length/5);}
-function draw2D(){
- const b=camBasis();ctx2.fillStyle='#030913';ctx2.fillRect(0,0,canvas.width,canvas.height);ctx2.save();ctx2.scale(dpr,dpr);
- const scale=Math.pow(10,-zoom*.33);
- const proj=p=>{const r=sub([p.x,p.y,p.z],b.cam),z=r.reduce((s,v,i)=>s+v*b.fwd[i],0);if(z<.2)return null;const x=(r.reduce((s,v,i)=>s+v*b.right[i],0)/(.64*z))*(vh/2)+vw/2,y=vh/2-(r.reduce((s,v,i)=>s+v*b.up[i],0)/(.64*z))*(vh/2);
-return {x,y,z};};
- let drawn=[];
- for(const p of nodes){const v=proj(p);if(!v||v.x<-20||v.y<-20||v.x>vw+20||v.y>vh+20)continue;
- const m=field.sample(p.x,p.y,p.z,scale);const intensity=clamp(m.energy/(m.energy+.1));drawn.push({...v,intensity,sign:m.u>0,holo:false});}
- if(hologram){for(const p of holoNodes){const v=proj(p);if(!v)continue;const m=field.sample(p.x,p.y,p.z,scale);drawn.push({...v,intensity:clamp(m.energy/(m.energy+.09)),sign:m.u>0,holo:true});
-}}
- drawn.sort((a,b)=>b.z-a.z);for(const p of drawn){const r=clamp(2.1*Math.sqrt(13/p.z),.6,4.4),alpha=.08+.73*p.intensity;
- ctx2.fillStyle=p.holo?`rgba(163,128,245,${alpha*.10})`:`rgba(${p.sign?'69,220,203':'91,117,240'},${alpha*.09})`;ctx2.beginPath();ctx2.arc(p.x,p.y,r*3.5,0,TAU);ctx2.fill();
-
- ctx2.fillStyle=p.holo?`rgba(173,141,252,${alpha*.55})`:`rgba(${p.sign?'93,244,220':'131,147,252'},${alpha*.73})`;ctx2.beginPath();ctx2.arc(p.x,p.y,r*.54,0,TAU);ctx2.fill();
+ for(const p of nodes){const m=field.sample(p.x,p.y,p.z,scale),density=clamp(m.energy/(m.energy+.27)),amplitude=clamp(Math.abs(m.u));
+  let bright;
+  if(focus==='energy')bright=density;
+  else if(focus==='frequency')bright=clamp(.1+Math.abs(m.ut)*1.7);
+  else if(focus==='information')bright=clamp(.25+.75*amplitude*field.last.P*2.5);
+  else bright=clamp(.22+.45*amplitude+.23*Math.sqrt(density));
+  push(p,.08+.82*bright,m.u>=0?1:-1);
+ }
+ if(hologram){for(const p of holoNodes){const m=field.sample(p.x,p.y,p.z,scale);push(p,.35+.65*clamp(m.energy/(m.energy+.22)),3);}}
+ for(const p of stars){const twinkle=.08+.18*Math.abs(Math.sin(p.x+p.z));push(p,twinkle,4);}
+ sampleCache=new Float32Array(list);return sampleCache;
 }
- if(paths){ctx2.lineWidth=.75;for(const p of field.feynman){const ang=p.p;ctx2.beginPath();let visible=false;for(let i=0;i<=40;i++){const q=i/40,env=Math.sin(Math.PI*q),r=env*(p.a*.85+p.noise*.28*Math.sin(4*Math.PI*q+p.p));
-const v=proj({x:(q-.5)*9,y:r*Math.cos(ang),z:r*Math.sin(ang)});if(!v)continue;if(!visible){ctx2.moveTo(v.x,v.y);visible=true;}else ctx2.lineTo(v.x,v.y);}ctx2.strokeStyle='rgba(216,164,255,.24)';
-ctx2.stroke();}}
+function drawGL(){const basis=camBasis();gl.clearColor(.004,.012,.024,1);gl.clear(gl.COLOR_BUFFER_BIT);gl.useProgram(program);
+ gl.uniform3fv(loc.uCam,basis.cam);gl.uniform3fv(loc.uRight,basis.right);gl.uniform3fv(loc.uUp,basis.up);gl.uniform3fv(loc.uFwd,basis.fwd);
+ gl.uniform1f(loc.uAspect,vw/vh);gl.uniform1f(loc.uTan,.65);gl.uniform1f(loc.uFocus,focusIndex[focus]);gl.uniform1f(loc.uXi,field.last.Xi||0);gl.uniform1f(loc.uTime,field.t);
+ const cloud=sampleCache||makeCloud();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,cloud,gl.DYNAMIC_DRAW);gl.drawArrays(gl.POINTS,0,cloud.length/5);
+ if(paths&&focus!=='emergence')drawPathsGL();
+}
+// An illustrative complex-phase path family. Not part of the field evolution or of Ξ evidence.
+const feynmanFamily=Array.from({length:25},(_,i)=>({a:(i-12)/12,angle:i*2.399963,phase:i*.38}));
+function drawPathsGL(){const points=[];for(const p of feynmanFamily)for(let i=0;i<=50;i++){const q=i/50,env=Math.sin(Math.PI*q),r=env*(p.a*1.3+.18*Math.sin(5*Math.PI*q+p.phase));points.push((q-.5)*9,Math.cos(p.angle)*r,Math.sin(p.angle)*r,.66,1.3);}const arr=new Float32Array(points);gl.bufferData(gl.ARRAY_BUFFER,arr,gl.DYNAMIC_DRAW);gl.drawArrays(gl.POINTS,0,arr.length/5);}
+function draw2D(){const b=camBasis(),cloud=sampleCache||makeCloud();ctx2.fillStyle='#030910';ctx2.fillRect(0,0,canvas.width,canvas.height);ctx2.save();ctx2.scale(dpr,dpr);
+ const sorted=[];for(let k=0;k<cloud.length;k+=5){const x=cloud[k],y=cloud[k+1],z=cloud[k+2],bright=cloud[k+3],sign=cloud[k+4],r=[x-b.cam[0],y-b.cam[1],z-b.cam[2]],depth=r[0]*b.fwd[0]+r[1]*b.fwd[1]+r[2]*b.fwd[2];if(depth<.18)continue;
+   const px=vw/2+(r[0]*b.right[0]+r[1]*b.right[1]+r[2]*b.right[2])/depth*vh/(2*.65),py=vh/2-(r[0]*b.up[0]+r[1]*b.up[1]+r[2]*b.up[2])/depth*vh/(2*.65);
+   if(px<-45||px>vw+45||py<-45||py>vh+45)continue;sorted.push({px,py,depth,bright,sign});}
+ sorted.sort((a,b)=>b.depth-a.depth);
+ for(const p of sorted){const r=clamp((focus==='emergence'?3.4:2.5)*Math.sqrt(14/p.depth),.5,6.5),alpha=.09+.7*p.bright;let rgb=(p.sign>3.5)?'75,106,125':(p.sign>2.5)?'128,113,230':(focus==='emergence'?p.sign>0?'250,214,156':'178,148,249':p.sign>0?'82,228,211':'92,121,234');
+ ctx2.fillStyle=`rgba(${rgb},${alpha*.09})`;ctx2.beginPath();ctx2.arc(p.px,p.py,r*3.6,0,TAU);ctx2.fill();ctx2.fillStyle=`rgba(${rgb},${alpha*.85})`;ctx2.beginPath();ctx2.arc(p.px,p.py,r*.48,0,TAU);ctx2.fill();}
  ctx2.restore();}
 function paint(){if(gl)drawGL();else draw2D();}
-function eventLog(title,text,emerge=false){const el=document.createElement('div');el.className='logrow'+(emerge?' emerge':'');const dot=document.createElement('i'),body=document.createElement('div'),heading=document.createElement('strong'),small=document.createElement('small');
-heading.textContent=title;small.textContent=`t=${field.t.toFixed(1)} · ${text}`;body.append(heading,small);el.append(dot,body);$('eventLog').prepend(el);const rows=$('eventLog').children;
-while(rows.length>8)rows[rows.length-1].remove();}
-const smooth=(v)=>v.toFixed(3);
-function updateUi(){const m=field.last;if(!m)return;$('xiReading').textContent=smooth(m.Xi);$('eReading').textContent=m.E.toFixed(2);$('lReading').textContent=m.L.toFixed(2);
-$('pReading').textContent=m.P.toFixed(2);$('eBar').style.width=(m.E*100)+'%';$('lBar').style.width=(m.L*100)+'%';$('pBar').style.width=(m.P*100)+'%';$('balanceReading').textContent=Math.round(m.B*100)+'%';
-$('entropyReading').textContent=m.entropy.toFixed(2)+' bits';$('energyReading').textContent=m.energy.toFixed(3);$('feynmanReading').textContent=m.pathP.toFixed(3);$('liveClock').textContent='t = '+field.t.toFixed(1);
-$('timeReadout').textContent=field.t.toFixed(2);
- chart.push({x:m.t,y:m.Xi});if(chart.length>120)chart.shift();drawChart();
- const cond=m.Xi>=threshold&&m.B>=.25&&m.P>.03;stableCount=cond?stableCount+1:0;
- if(!emergence&&stableCount>=3){emergence=true;eventLog('Ξ · Emergência operacional','Integração e equilíbrio acima dos limiares',true);}
- if(emergence&&stableCount===0){emergence=false;eventLog('Ξ · Dissipação','Os critérios deixaram de se verificar');}
- $('xiBurst').classList.toggle('hidden',!emergence);$('xiState').textContent=emergence?'Limiar de emergência satisfeito':'Integração em evolução';
- if(m.Xi>threshold&&prevXi<=threshold)eventLog('Cruzamento de Ξ','Índice acima do limiar escolhido');prevXi=m.Xi;
-}
-function drawChart(){const c=$('xiChart'),x=c.getContext('2d'),w=c.width,h=c.height;x.clearRect(0,0,w,h);x.strokeStyle='#284453';x.lineWidth=1;for(let i=0;i<4;i++){const y=6+i*(h-14)/3;
-x.beginPath();x.moveTo(0,y);x.lineTo(w,y);x.stroke();}if(chart.length<2)return;const max=Math.max(.1,...chart.map(p=>p.y),threshold*1.25),pts=chart.map((p,i)=>[i/(Math.max(1,chart.length-1))*(w-8)+4,h-7-p.y/max*(h-15)]);
-let gradient=x.createLinearGradient(0,0,0,h);gradient.addColorStop(0,'#6fe9d944');gradient.addColorStop(1,'#6fe9d900');x.beginPath();x.moveTo(pts[0][0],h);for(const p of pts)x.lineTo(...p);
-x.lineTo(pts.at(-1)[0],h);x.closePath();x.fillStyle=gradient;x.fill();x.beginPath();pts.forEach((p,i)=>i?x.lineTo(...p):x.moveTo(...p));x.strokeStyle='#8dfce7';x.lineWidth=2;
-x.stroke();x.strokeStyle='#dfba784d';x.setLineDash([3,5]);const t=h-7-threshold/max*(h-15);x.beginPath();x.moveTo(0,t);x.lineTo(w,t);x.stroke();x.setLineDash([]);}
-function toast(msg){const e=$('toast');e.textContent=msg;e.classList.add('show');clearTimeout(toast.id);toast.id=setTimeout(()=>e.classList.remove('show'),2500);}
-function reset(){field.reset();field.t=-14;for(let j=0;j<255;j++)field.record(.055);stableCount=0;emergence=false;prevXi=0;chart=[];tick=0;sampleCache=null;$('eventLog').textContent='';
-eventLog('Condições iniciais','Pré-história calculada: 14 unidades de tempo do modelo');updateUi();drawDirty=true;}
-$('energyRange').addEventListener('input',e=>{field.energyGain=+e.target.value;$('energyVal').textContent=field.energyGain.toFixed(2)+'×';});
-$('phaseRange').addEventListener('input',e=>{field.coherence=+e.target.value;$('phaseVal').textContent=field.coherence.toFixed(2);});
-$('xiThreshold').addEventListener('input',e=>{threshold=+e.target.value;$('xiVal').textContent=threshold.toFixed(3);});
-function zoomSet(v){zoom=clamp(+v,-12,12);$('zoomSlider').value=zoom;$('zoomValue').innerHTML=`10<sup>${zoom.toFixed(1)}</sup>`;$('scaleReadout').textContent='10^'+zoom.toFixed(1);
-drawDirty=true;}
-$('zoomSlider').addEventListener('input',e=>zoomSet(e.target.value));
-function pause(p){paused=p;$('runBtn').innerHTML=paused?'▶ <span>Retomar</span>':'Ⅱ <span>Pausar</span>';}
-$('runBtn').onclick=()=>pause(!paused);$('stepBtn').onclick=()=>{pause(true);for(let k=0;k<4;k++)field.record(.047);tick++;updateUi();sampleCache=null;paint();};$('resetBtn').onclick=reset;
-
-function setFly(next){fly=next;auto=false;$('autoBtn').classList.remove('chosen');$('orbitBtn').classList.toggle('chosen',!fly);$('flyBtn').classList.toggle('chosen',fly);
-if(fly){const b=camBasis();camera.position=b.cam.slice();camera.yaw+=Math.PI;camera.pitch=-camera.pitch;toast('Modo livre: WASD · Q/E · arrastar');}else{camera.target=[0,0,0];
-camera.dist=17;camera.yaw=.65;camera.pitch=.27;} $('cameraReadout').textContent=fly?'LIVRE · 360°':'ORBITAL · 360°';}
-$('orbitBtn').onclick=()=>setFly(false);$('flyBtn').onclick=()=>setFly(true);
-$('autoBtn').onclick=()=>{auto=!auto;$('autoBtn').classList.toggle('chosen',auto);if(auto&&fly)setFly(false);toast(auto?'Exploração automática ligada':'Exploração automática desligada');
-};
-$('holoBtn').onclick=()=>{hologram=!hologram;$('holoBtn').classList.toggle('chosen',hologram);toast(hologram?'Mapa de observáveis no contorno · não dualidade holográfica':'Projeção desligada');
-sampleCache=null;};
-$('pathsBtn').onclick=()=>{paths=!paths;$('pathsBtn').classList.toggle('chosen',paths);toast(paths?'Caminhos com fases e^{iS/ℏ} · demonstração':'Caminhos ocultos');};
-$('speedSelect').onchange=e=>{speed=+e.target.value;};
-$('exportBtn').onclick=()=>{const rows=['tempo,xi,E,lambda,phi,equilibrio,entropiaBits,densidadeEnergia'];for(const r of rowsCache)rows.push(Object.values(r).join(','));const blob=new Blob(['# Omega 2.0; campo escalar classico; Phi proxy estatistica, NAO IIT; Xi indice exploratorio\n',rows.join('\n')],{type:'text/csv;charset=utf-8'}),link=document.createElement('a'),url=URL.createObjectURL(blob);
-link.href=url;link.download='omega_xphle_observacoes.csv';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
-const rowsCache=[];
-$('helpBtn').onclick=()=>{$('scientificPanel').classList.remove('hidden');pause(true);};$('closeModal').onclick=$('closeBottom').onclick=()=>$('scientificPanel').classList.add('hidden');
-$('scientificPanel').onclick=e=>{if(e.target===$('scientificPanel'))$('scientificPanel').classList.add('hidden');};
-$('settingsBtn').onclick=()=>{$('ontology').classList.toggle('expanded');};
+function updateUi(){const m=field.last;for(const [id,k] of [['eReading','E'],['lReading','L'],['pReading','P'],['xiReading','Xi']]){$(id).textContent=Number.isFinite(m[k])?m[k].toFixed(3):'—';}
+ $('timeReadout').textContent='t '+field.t.toFixed(1);
+ const n=field.confirmed.length;$('xiStatus').textContent=n===0?'NENHUMA EMERGÊNCIA VALIDADA':`${n} ${n===1?'ESTRUTURA':'ESTRUTURAS'} CONFIRMADAS`;
+ // Evidence list contains ONLY numerically confirmed events.
+ $('xiEvidence').innerHTML='';for(const e of field.confirmed){const row=document.createElement('div'),tag=document.createElement('b');tag.textContent=e.sign>0?'Ξ⁺':'Ξ⁻';row.append(tag,document.createTextNode(` · ${e.size} células · t=${e.at.toFixed(1)}`));$('xiEvidence').append(row);}
+ const currentMax=field.confirmed.reduce((x,e)=>Math.max(x,e.id),0);
+ if(currentMax>lastEventID && focus==='emergence'){const toast=$('xiBurst');toast.classList.remove('hidden');setTimeout(()=>toast.classList.add('hidden'),2500);}
+ if(currentMax>lastEventID)lastEventID=currentMax;
+ }
+function toast(text){const el=$('toast');el.textContent=text;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),1900);}
+function reset(){field.reset();accum=0;lastEventID=0;sampleCache=null;$('xiBurst').classList.add('hidden');updateUi();drawDirty=true;}
+function zoomSet(v){zoom=clamp(+v,-13,13);$('scaleReadout').textContent='10^'+zoom.toFixed(1);sampleCache=null;drawDirty=true;}
+function pause(p){paused=!!p;$('runBtn').textContent=paused?'▶':'Ⅱ';$('runBtn').setAttribute('aria-label',paused?'Continuar':'Pausar');$('runningLabel').textContent=paused?'EM PAUSA':'EM EVOLUÇÃO';}
+$('runBtn').onclick=()=>pause(!paused);$('resetBtn').onclick=reset;
+function setFly(next){const prior=camBasis();fly=next;auto=false;$('autoBtn').classList.remove('selected');$('orbitBtn').classList.toggle('selected',!fly);$('flyBtn').classList.toggle('selected',fly);
+ if(fly){camera.position=prior.cam.slice();camera.yaw+=Math.PI;camera.pitch=-camera.pitch;toast('Voar · WASD / Q / E');}else{camera.target=[0,0,0];camera.dist=19;camera.yaw=.7;camera.pitch=.22;}
+ $('cameraReadout').textContent=fly?'VOO 360°':'360°';drawDirty=true;}
+$('orbitBtn').onclick=()=>setFly(false);$('flyBtn').onclick=()=>setFly(true);$('autoBtn').onclick=()=>{auto=!auto;$('autoBtn').classList.toggle('selected',auto);if(auto&&fly)setFly(false);};
+$('holoBtn').onclick=()=>{hologram=!hologram;$('holoBtn').classList.toggle('selected',hologram);if(focus==='emergence')toast('A camada Ξ mostra apenas eventos validados');drawDirty=true;sampleCache=null;};
+$('pathsBtn').onclick=()=>{paths=!paths;$('pathsBtn').classList.toggle('selected',paths);if(focus==='emergence')toast('A camada Ξ oculta caminhos ilustrativos');drawDirty=true;};
+const rows=[];$('exportBtn').onclick=()=>{const h=['tempo,E,lambda,phi,xi,densidadeEnergia,amplitude,validacoes'];const csv=h.concat(rows).join('\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='omega_3_observacoes.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+$('helpBtn').onclick=()=>{$('scientificPanel').classList.remove('hidden');};$('closeModal').onclick=$('closeBottom').onclick=()=>$('scientificPanel').classList.add('hidden');$('scientificPanel').onclick=e=>{if(e.target===$('scientificPanel'))$('scientificPanel').classList.add('hidden');};
 $('fullscreenBtn').onclick=()=>{if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();else document.exitFullscreen?.();};
-canvas.addEventListener('pointerdown',e=>{pointer.set(e.pointerId,{x:e.clientX,y:e.clientY,button:e.button});canvas.setPointerCapture(e.pointerId);auto=false;$('autoBtn').classList.remove('chosen');
-});
-canvas.addEventListener('pointerup',e=>pointer.delete(e.pointerId));canvas.addEventListener('pointercancel',e=>pointer.delete(e.pointerId));canvas.addEventListener('contextmenu',e=>e.preventDefault());
-
+canvas.addEventListener('pointerdown',e=>{pointer.set(e.pointerId,{x:e.clientX,y:e.clientY,button:e.button});canvas.setPointerCapture(e.pointerId);auto=false;$('autoBtn').classList.remove('selected');});
+canvas.addEventListener('pointerup',e=>{pointer.delete(e.pointerId);pointer.lastPinch=null;});canvas.addEventListener('pointercancel',e=>{pointer.delete(e.pointerId);pointer.lastPinch=null;});canvas.addEventListener('contextmenu',e=>e.preventDefault());
 canvas.addEventListener('pointermove',e=>{if(!pointer.has(e.pointerId))return;const p=pointer.get(e.pointerId),dx=e.clientX-p.x,dy=e.clientY-p.y;p.x=e.clientX;p.y=e.clientY;
-if(pointer.size>=2){const coords=[...pointer.values()];const dist=Math.hypot(coords[0].x-coords[1].x,coords[0].y-coords[1].y);if(pointer.lastPinch)zoomSet(zoom+Math.log(dist/pointer.lastPinch)*3);
-pointer.lastPinch=dist;return;}pointer.lastPinch=null;if(p.button===2&&!fly){const b=camBasis();camera.target=add(add(camera.target,b.right,-dx*.012),b.up,dy*.012);}else{camera.yaw+=dx*.006;
-camera.pitch=clamp(camera.pitch+(fly?-1:1)*dy*.005,-1.53,1.53);}drawDirty=true;});
-canvas.addEventListener('wheel',e=>{e.preventDefault();zoomSet(zoom-e.deltaY*.006);camera.dist=clamp(camera.dist*Math.exp(e.deltaY*.0008),1.5,80);},{passive:false});
-addEventListener('keydown',e=>{if(e.target&&['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;const k=e.key.toLowerCase();if('wasdqe'.includes(k)&&k.length===1){keys.add(k);
-if(fly)e.preventDefault();}if(k===' '&&!e.repeat){e.preventDefault();pause(!paused);}if(k==='escape')$('scientificPanel').classList.add('hidden');if(k==='h')$('holoBtn').click();
-});addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
-function move(dt){if(fly){const b=camBasis();const s=dt*7*(1+Math.abs(zoom)*.08);let d=[0,0,0];if(keys.has('w'))d=add(d,b.fwd,1);if(keys.has('s'))d=add(d,b.fwd,-1);if(keys.has('a'))d=add(d,b.right,-1);
-if(keys.has('d'))d=add(d,b.right,1);if(keys.has('q'))d=add(d,[0,1,0],1);if(keys.has('e'))d=add(d,[0,1,0],-1);let norm=Math.hypot(...d);if(norm)camera.position=add(camera.position,d,s/norm);
-
- // Floating origin to retain local numerical precision in unbounded travel.
- let R=Math.hypot(...camera.position);if(R>800){camera.position=camera.position.map(v=>v*.01);toast('Origem móvel reajustada (precisão numérica)');}}
- else if(auto){camera.yaw+=dt*.047;camera.pitch=.23+.17*Math.sin(field.t*.035);}}
-function animate(ts){const dt=Math.min((ts-last)/1000||.016,.05);last=ts;move(dt);if(!paused){tick+=dt*24*speed;let steps=0;while(tick>=1&&steps<8){field.record(.055);tick--;
-steps++;frame++;if(frame%5===0){const m=field.last;rowsCache.push({tempo:m.t.toFixed(3),xi:m.Xi.toFixed(5),E:m.E.toFixed(5),lambda:m.L.toFixed(5),phi:m.P.toFixed(5),equilibrio:m.B.toFixed(5),entropiaBits:m.entropy.toFixed(5),densidadeEnergia:m.energy.toFixed(5)});
-updateUi();} } }
- if(frame%2===0||drawDirty){sampleCache=updateCloud();drawDirty=false;}paint();requestAnimationFrame(animate);}
-reset();toast(gl?'WebGL 3D ativo · Ω em evolução':'Renderizador 3D de compatibilidade ativo');requestAnimationFrame(animate);
-window.OMEGA={version:'2.0',field,physics:{getMetrics:()=>field.last},getState:()=>({time:field.t,focus,paused,scale:zoom,emergence,metrics:{...field.last}}),setFocus,zoomSet,pause,reset};
-
-</script></body></html>
+ if(pointer.size>=2){const c=[...pointer.values()],dist=Math.hypot(c[0].x-c[1].x,c[0].y-c[1].y);if(pointer.lastPinch)zoomSet(zoom+Math.log(dist/pointer.lastPinch)*3);pointer.lastPinch=dist;return;}
+ pointer.lastPinch=null;if(p.button===2&&!fly){const b=camBasis();camera.target=add(add(camera.target,b.right,-dx*.014),b.up,dy*.014);}else{camera.yaw+=dx*.006;camera.pitch=clamp(camera.pitch+(fly?-1:1)*dy*.005,-1.53,1.53);}drawDirty=true;});
+canvas.addEventListener('wheel',e=>{e.preventDefault();zoomSet(zoom-e.deltaY*.006);camera.dist=clamp(camera.dist*Math.exp(e.deltaY*.0007),1.5,100);},{passive:false});
+addEventListener('keydown',e=>{if(e.target&&['INPUT','SELECT','TEXTAREA'].includes(e.target.tagName))return;const k=e.key.toLowerCase();if('wasdqe'.includes(k)&&k.length===1){keys.add(k);if(fly)e.preventDefault();}if(k===' '&&!e.repeat){e.preventDefault();pause(!paused);}if(k==='escape')$('scientificPanel').classList.add('hidden');if('12345'.includes(k)&&k.length===1)setFocus(Object.keys(focusIndex)[+k-1]);if(k==='+'||k==='=')zoomSet(zoom+.4);if(k==='-')zoomSet(zoom-.4);});addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));
+function move(dt){if(fly){const b=camBasis(),s=dt*8*(1+Math.abs(zoom)*.08);let d=[0,0,0];if(keys.has('w'))d=add(d,b.fwd,1);if(keys.has('s'))d=add(d,b.fwd,-1);if(keys.has('a'))d=add(d,b.right,-1);if(keys.has('d'))d=add(d,b.right,1);if(keys.has('q'))d=add(d,[0,1,0],1);if(keys.has('e'))d=add(d,[0,1,0],-1);let norm=Math.hypot(...d);if(norm)camera.position=add(camera.position,d,s/norm);
+ const R=Math.hypot(...camera.position);if(R>10000){camera.position=camera.position.map(v=>v*.001);toast('Referencial numérico reajustado');}}
+ else if(auto){camera.yaw+=dt*.037;camera.pitch=.22+.13*Math.sin(field.t*.04);}}
+function animate(ts){const dt=Math.min((ts-last)/1000||.016,.05);last=ts;move(dt);
+ if(!paused){accum+=dt*45;let steps=0;while(accum>=1&&steps<5){field.step();accum--;steps++;}
+ if(steps){frame+=steps;if(frame%7<steps){const m=field.last;rows.push([m.t,m.E,m.L,m.P,m.Xi,m.energy,m.meanAbs,m.confirmed].map(v=>Number.isFinite(v)?Number(v).toFixed(5):'0').join(','));if(rows.length>6000)rows.shift();updateUi();}drawDirty=true;}}
+ if(drawDirty&&Math.floor(ts/42)!==animate.lastDraw){makeCloud();animate.lastDraw=Math.floor(ts/42);drawDirty=false;}paint();requestAnimationFrame(animate);
+}
+reset();requestAnimationFrame(animate);
+window.OMEGA={version:'3.0',field,physics:{getMetrics:()=>field.last},getState:()=>({time:field.t,focus,paused,scale:zoom,confirmed:field.confirmed.length,eventHistory:field.events.map(e=>({id:e.id,sign:e.sign,time:e.time,size:e.size})),metrics:{...field.last}}),setFocus,zoomSet,pause,reset};
+</script>
+</body></html>
